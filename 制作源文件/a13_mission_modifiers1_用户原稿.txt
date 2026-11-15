@@ -1,0 +1,28 @@
+bumandebanshenren = {
+    defensiveness = -0.2
+}
+
+ailunruqin = {
+    land_morale = 0.1
+    siege_ability = 0.1
+    shock_damage = 0.1
+    province_warscore_cost = -0.2
+}
+ailundeshengli = {
+    years_of_nationalism = -10
+}
+weiqiaoenchuchou = {
+    land_morale = 0.15
+}
+quanwanqudezhuren = {
+    core_creation = -0.1
+}
+xiangdongjinfa = {
+    global_colonial_growth = 25
+}
+tongzhibeiweik = {
+    land_morale = 0.1
+}
+lanwanzhizhu = {
+    land_morale = 0.05
+}

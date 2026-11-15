@@ -1,0 +1,597 @@
+a13_mission_1 = { #第一列
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = a13 } 
+
+	a13_1_1 = { #煽动半身人
+		icon = contracts_of_correspondence
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			a01 = {
+				has_spy_network_from = {
+					who = ROOT 
+					value = 25
+				}
+			}
+		 } 
+
+		effect = { 
+			a01 = {
+                add_country_modifier = {
+				   name = bumandebanshenren
+				   duration = 7300
+			}
+		 } 
+	}
+}
+a13_mission_2 = { #第二列
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = a13 } 
+
+	a13_2_1 = { #对帝国让步
+		icon = mission_sunyanin
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			a30 = {
+				has_opinion_modifier = {
+					who = ROOT 
+					modifier = sent_gift
+			  }
+			}
+		 } 
+
+		effect = { 
+			
+            }
+		 } 
+	}
+
+	a13_2_2 = { #雄鹰与海葵骑士
+		icon = mission_diplomacy_missive
+		position = 2
+		required_missions = {
+			a13_1_1
+			a13_2_1
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			a02 = {
+				has_opinion = {
+					who = ROOT
+					value = 75
+				}
+			}
+		 } 
+
+		effect = { 
+			create_alliance = a02
+			add_historical_friend = a02
+			add_favors = {
+				who = a02
+				amount = 30
+			}
+		 } 
+	}
+
+	a13_2_3 = { #千年恩怨新篇章
+		icon = protect_against_austria
+		position = 3
+		required_missions = { a13_2_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			a01 = {
+				war_with = ROOT
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+				name = ailunruqin
+				duration = 7300
+			}
+
+		 } 
+	}
+
+	a13_2_4 = { #战胜玫瑰
+		icon = mission_unite_home_region
+		position = 4
+		required_missions = { a13_2_3 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			a13 = {
+				war_score_against = {
+					who = a01
+					value = 75
+				}
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+				name = ailundeshengli
+				duration = 7300
+			}
+		 } 
+	}
+
+	a13_2_5 = { #掌控坎诺粮仓
+		icon = mission_redfoot
+		position = 5
+		required_missions = { a13_2_4 } 
+		provinces_to_highlight = { 
+			region = small_country_region
+		 } 
+
+		trigger = { 
+			small_country_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			redglades_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			ionnidar_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			east_ruby_mountains_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			upper_bloodwine_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+		 } 
+	}
+}
+a13_mission_3 = { #第三列
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = a13 } 
+
+	a13_3_1 = { #利用北方旧怨
+		icon = mission_confrontation
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			z26 = {
+				has_opinion = {
+					who = ROOT
+					value = 120
+				}
+		 } 
+
+		effect = { 
+			serpentshead_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			coast_of_vics_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			west_chillsbay_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			add_permanent_claim = ROOT
+			northern_greatwoods_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			create_vassal = z26
+		 } 
+	}
+
+	a13_3_2 = { #克洛维之诗
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { a13_3_1 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+            has_country_flag = frozenmaw_53_happened
+         }
+
+		effect = { 
+			
+		 } 
+	}
+
+	a13_3_3 = { 兽人暴政终结
+		icon = mission_horse_siege
+		position = 3
+		required_missions = { a13_3_2 } 
+		provinces_to_highlight = { 
+			OR = {
+				area =east_chillsbay_area
+				area = sondaar_area
+				area = cedesck_area
+			}
+		 } 
+
+		trigger = { 
+			east_chillsbay_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sondaar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			cedesck_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+				name = weiqiaoenchuchou
+				duration = 7300
+			}
+		 } 
+	}
+
+	a13_3_4 = { #实至名归的湾区之王
+		icon = mission_approach_throne
+		position = 4
+		required_missions = {
+			a13_3_3
+			a13_4_3
+		}
+		provinces_to_highlight = { 
+			OR = {
+				region = alenic_reach_region
+				area = coddorran_heights_area
+				area = westmoor_proper_area
+				area = moorhills_area
+				area = beronmoor_area
+			}
+		 } 
+
+		trigger = { 
+			alenic_reach_region = {
+				owned_by = ROOT
+			}
+			coddorran_heights_area = {
+				owned_by = ROOT
+			}
+			westmoor_proper_area = {
+				owned_by = ROOT
+			}
+			moorhills_area = {
+				owned_by = ROOT
+			}
+			beronmoor_area = {
+				owned_by = ROOT
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+				name = quanwanqudezhuren
+				duration = -1
+			}
+			wudhal_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			northern_giants_tears_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+			southern_giants_tears_area = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+				add_permanent_claim = ROOT
+			}
+		 } 
+	}
+
+	a13_3_5 = { #追剿兽人残党
+		icon = mission_verdant_secret
+		position = 5
+		required_missions = { a13_3_4 } 
+		provinces_to_highlight = { 
+			area = wudhal_area
+			area = northern_giants_tears_area
+			area = southern_giants_tears_area
+			}
+
+		trigger = { 
+			wudhal_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_giants_tears_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_giants_tears_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+				name = xiangdongjinfa
+				duration = 36500
+			}
+		 } 
+	}
+}
+a13_mission_4 = { #第四列
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = a13 } 
+
+	a13_4_2 = { #征服贝维克
+		icon = mission_merchant_trip
+		position = 2
+		required_missions = {
+			a13_3_1
+			a13_5_1
+		}
+		provinces_to_highlight = { 
+			area = coast_of_vics_area
+		 } 
+
+		trigger = { 
+			coast_of_vics_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+				name = tongzhibeiweik
+				duration = 7300
+			}
+		 } 
+	}
+
+	a13_4_3 = { 统治蓝湾
+		icon = mission_priest_church
+		position = 3
+		required_missions = { a13_4_2 } 
+		provinces_to_highlight = { 
+			area = serpentshead_area
+			area = coast_of_vics_area
+			area = west_chillsbay_area
+			area = northern_greatwoods_area
+		 } 
+
+		trigger = { 
+			serpentshead_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			coast_of_vics_area  = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_chillsbay_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_greatwoods_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			add_country_modifier = {
+			name = lanwanzhizhu
+			duration = -1
+		 } 
+	}
+
+	a13_4_4 = { #清除毒疮
+		icon = mission_skull
+		position = 4
+		required_missions = { a13_4_3 } 
+		provinces_to_highlight = { 
+			province = 8432
+		 } 
+
+		trigger = { 
+			8432 = {
+				culture = bule_reachmen
+		 } 
+
+		effect = { 
+			8432 = {
+				add_base_tax = 1
+				add_base_production = 2
+				add_base_manpower = 1
+			}
+		 } 
+	}
+
+	a13_4_5 = { #加韦德舰队
+		icon = mission_exploration
+		position = 5
+		required_missions = { a13_4_4 } 
+		provinces_to_highlight = { 
+			province = 8432
+		 } 
+
+		trigger = { 
+			development_in_provinces = {
+				value = 20
+				province = 8432
+			}
+			navy_size =40
+		 } 
+
+		effect = { 
+			dalr_region = {
+				NOT = { is_permanent_claim = ROOT }
+				NOT = { is_core = ROOT}
+			}
+			add_permanent_claim = ROOT
+		 } 
+	}
+}
+a13_mission_5 = { #第五列
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = a13 } 
+
+	a13_5_1 = { #第一次富商议会
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			has_mil_advisor_2 = yes
+			has_adm_advisor_2 = yes
+			has_mil_advisor_2 = yes
+            estate_loyalty = {
+				estate = estate_burghers
+				loyalty = 60
+			}
+			has_estate_privilege = estate_burghers_magnate_council
+		 } 
+
+		effect = { 
+
+		 } 
+	}
+
+	a13_5_2 = { #国王的左膀右臂
+		icon = mission_monarch_diplomacy
+		position = 2
+		required_missions = { a13_5_1 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+           government_rank = 2
+		   adm_power = 100
+		 } 
+
+		effect = { 
+			add_adm_power = -100
+		 } 
+	}
+    a13_5_3 = { #不得不面对之人
+		icon = unite_the_wittelsbachs
+		position = 3
+		required_missions = { a13_5_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			if = {
+				estate_influence = {
+					estate = estate_nobles
+					influence = 50
+				}
+			}
+			has_estate_privilege = estate_nobles_supremacy_over_crown
+			treasury = 200
+			else = {
+				NOT = {
+					estate_influence = {
+					   estate = estate_nobles
+					   influence = 50
+				}
+			}
+			    NOT = {
+					num_of_estate_privileges = {
+						estate = estate_nobles
+						value = 2
+					}
+				}
+
+		 } 
+
+		effect = {  } 
+	}
+
+	a13_5_4 = { #威利亚姆的大围猎
+		icon = sav_union_with_naples
+		position = 4
+		required_missions = { a13_5_3 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			diplomatic_reputation = 2
+			NOT = {
+				liberty_desire = 50
+			}
+			calc_ture_if = {
+				all_country = {
+					alliance_with = ROOT
+				}
+				has_opinion = {
+					who = ROOT
+					value = 150
+				}
+				amount = 2
+			}
+		 } 
+
+		effect = {  } 
+	}
+
+	a13_5_5 = { #威利亚姆之治
+		icon = mission_arabian_thalassocracy
+		position = 5
+		required_missions = { a13_5_4 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			every_owned_province = {
+               limit = { is_state = yes }
+			   NOT = {
+				local_autonomy = 15
+			   }
+			}
+			trade_income = 8
+			is_at_war = no
+			stability = 2
+		 } 
+
+		effect = { 
+		 } 
+	}
+}
