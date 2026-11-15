@@ -1,13 +1,5 @@
 ﻿l_english:
- gawed_draft_condition_pending:0 "dkûN¡R„vŒRbagöNS*g™Q0"
- gawed_draft_opinion_pending:0 "…VcšRÿùR^ýV©‹ekNb—„vsQû|îOck0"
- gawed_draft_reward_bumandebanshenren:0 "…VeˆûN¡RVY±RÿbumandebanshenrenÿŸSšRcíu 7300 )Y	ÿ0"
- gawed_draft_reward_ailunruqin:0 "…VeˆûN¡RVY±RÿailunruqinÿŸSšRcíu 7300 )Y	ÿ0"
- gawed_draft_reward_weiqiaoenchuchou:0 "…VeˆûN¡RVY±RÿweiqiaoenchuchouÿŸSšRcíu 7300 )Y	ÿ0"
- gawed_draft_reward_quanwanqudezhuren:0 "…VeˆûN¡RVY±RÿquanwanqudezhurenÿŸSšRcíu -1 )Y	ÿ0"
- gawed_draft_reward_xiangdongjinfa:0 "…VeˆûN¡RVY±RÿxiangdongjinfaÿŸSšRcíu 3650 )Y	ÿ0"
- gawed_draft_reward_tongzhibeiweik:0 "…VeˆûN¡RVY±RÿtongzhibeiweikÿŸSšRcíu 7300 )Y	ÿ0"
- gawed_draft_reward_lanwanzhizhu:0 "…VeˆûN¡RVY±RÿlanwanzhizhuÿŸSšRcíu 7300 )Y	ÿ0"
+ # ôf°eÿûN¡Rh˜˜Ç‘(u°eHrŸS?zÿ.Rd–òTûyd–„v a13_2_6 ŒTçe…VkXVY±RÐcHy0
  a13_1_1_title:0 "‹q¨RJS«ŽºN"
  a13_1_1_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
  a13_2_1_title:0 "ùR^ýV©‹ek"
@@ -20,8 +12,6 @@
  a13_2_4_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
  a13_2_5_title:0 "ŒcµcNWú‹®|ÓN"
  a13_2_5_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
- a13_2_6_title:0 ",rN6–µk…VšRûN¡R a13_2_6"
- a13_2_6_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
  a13_3_1_title:0 ")R(uS¹eçe(`"
  a13_3_1_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
  a13_3_2_title:0 "KQmôuKN×‹"
@@ -40,13 +30,22 @@
  a13_4_4_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
  a13_4_5_title:0 " Ræ—·V0‚–"
  a13_4_5_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
- a13_5_1_title:0 ",rN6–µk…VšRûN¡R a13_5_1"
+ a13_5_1_title:0 ",rN/kÌRFU®‹O"
  a13_5_1_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
- a13_5_2_title:0 ",rN6–µk…VšRûN¡R a13_5_2"
+ a13_5_2_title:0 "ýV‹s„væTŽóSÂ"
  a13_5_2_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
- a13_5_3_title:0 ",rN6–µk…VšRûN¡R a13_5_3"
+ a13_5_3_title:0 "N—VNb—ùRKNºN"
  a13_5_3_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
- a13_5_4_title:0 ",rN6–µk…VšRûN¡R a13_5_4"
+ a13_5_4_title:0 "Z)RšNÆY„v'YôVs"
  a13_5_4_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
- a13_5_5_title:0 ",rN6–µk…VšRûN¡R a13_5_5"
+ a13_5_5_title:0 "Z)RšNÆYKN»l"
  a13_5_5_desc:0 ",rN6–µkûN¡RIƒ?zÿÙS‹N‡e,g…Veˆ0"
+ # °ežXÿHNòT¥ceQ„vûN¡RîOckeˆ-N‡e>fHyTÿNîO9eîOckpe<P0
+ bumandebanshenren:0 "Nán„vJS«ŽºN"
+ ailunruqin:0 "Œ‚&OeQµO"
+ ailundeshengli:0 "Œ‚&O„vÜw)R"
+ weiqiaoenchuchou:0 "HNTNi`YÇN"
+ quanwanqudezhuren:0 "hQŒnHS„vINºN"
+ xiangdongjinfa:0 "TNÛÑS"
+ tongzhibeiweik:0 "ßu»lôuKQ"
+ lanwanzhizhu:0 "Ý„ŒnKNIN"

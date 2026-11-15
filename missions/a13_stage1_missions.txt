@@ -1,0 +1,652 @@
+﻿# 新版运行稿；对应未改动原稿：制作源文件/加韦德任务_新版用户原稿.txt。
+# 修正：统一补齐括号并重新缩进；每处逻辑修正均有中文注释。
+# 修正：国家代码统一使用 A13/A01/A02/A30/Z26，任务和修正 ID 保持不变。
+
+a13_mission_1 = { # 第 1 列
+    slot = 1
+    generic = no
+    ai = yes
+    has_country_shield = yes
+    potential = { tag = A13 }
+
+    a13_1_1 = { # 煽动半身人
+        icon = contracts_of_correspondence
+        position = 1
+        # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
+        provinces_to_highlight = { }
+        trigger = {
+            A01 = {
+                has_spy_network_from = {
+                    who = ROOT
+                    value = 25
+                }
+            }
+        }
+        effect = {
+            A01 = {
+                add_country_modifier = {
+                    name = bumandebanshenren
+                    duration = 7300
+                }
+            }
+        }
+    }
+
+}
+
+a13_mission_2 = { # 第 2 列
+    slot = 2
+    generic = no
+    ai = yes
+    has_country_shield = yes
+    potential = { tag = A13 }
+
+    a13_2_1 = { # 对帝国让步
+        icon = mission_sunyanin
+        position = 1
+        # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
+        provinces_to_highlight = { }
+        trigger = {
+            A30 = {
+                has_opinion_modifier = {
+                    who = ROOT
+                    modifier = sent_gift
+                }
+            }
+        }
+        effect = {
+            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+        }
+    }
+
+    a13_2_2 = { # 雄鹰与海葵骑士
+        icon = mission_diplomacy_missive
+        position = 2
+        required_missions = {
+            a13_1_1
+            a13_2_1
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            A02 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 75
+                }
+            }
+        }
+        effect = {
+            create_alliance = A02
+            add_historical_friend = A02
+            add_favors = {
+                who = A02
+                amount = 30
+            }
+        }
+    }
+
+    a13_2_3 = { # 千年恩怨新篇章
+        icon = protect_against_austria
+        position = 3
+        required_missions = {
+            a13_2_2
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            A01 = {
+                war_with = ROOT
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = ailunruqin
+                duration = 7300
+            }
+        }
+    }
+
+    a13_2_4 = { # 战胜玫瑰
+        icon = mission_unite_home_region
+        position = 4
+        required_missions = {
+            a13_2_3
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            A13 = {
+                war_score_against = {
+                    who = A01
+                    value = 75
+                }
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = ailundeshengli
+                duration = 7300
+            }
+        }
+    }
+
+    a13_2_5 = { # 掌控坎诺粮仓
+        icon = mission_redfoot
+        position = 5
+        required_missions = {
+            a13_2_4
+        }
+        provinces_to_highlight = {
+            region = small_country_region
+        }
+        trigger = {
+            small_country_region = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        effect = {
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            redglades_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            ionnidar_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            east_ruby_mountains_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            upper_bloodwine_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+}
+
+a13_mission_3 = { # 第 3 列
+    slot = 3
+    generic = no
+    ai = yes
+    has_country_shield = yes
+    potential = { tag = A13 }
+
+    a13_3_1 = { # 利用北方旧怨
+        icon = mission_confrontation
+        position = 1
+        # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
+        provinces_to_highlight = { }
+        trigger = {
+            Z26 = {
+                has_opinion = {
+                    who = ROOT
+                    value = 120
+                }
+            }
+        }
+        effect = {
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            serpentshead_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            coast_of_vics_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            west_chillsbay_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：原国家作用域的孤立宣称行已移入上方省份组。
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            northern_greatwoods_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            create_vassal = Z26
+        }
+    }
+
+    a13_3_2 = { # 克洛维之诗
+        icon = mission_impaled_soldies
+        position = 2
+        required_missions = {
+            a13_3_1
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            # 待补：当前 Anbennar 的 flavor_frozenmaw.53 没有设置此旗标。
+            # 按原稿保留条件；后续须补配套事件或确认替代条件，未擅自改成开局可完成。
+            has_country_flag = frozenmaw_53_happened
+        }
+        effect = {
+            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+        }
+    }
+
+    a13_3_3 = { # 兽人暴政终结
+        icon = mission_horse_siege
+        position = 3
+        # 修正：原稿标题缺少 #；已恢复为注释，避免被解析成脚本。
+        required_missions = {
+            a13_3_2
+        }
+        provinces_to_highlight = {
+            OR = {
+                area =east_chillsbay_area
+                area = sondaar_area
+                area = cedesck_area
+            }
+        }
+        trigger = {
+            east_chillsbay_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            sondaar_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            cedesck_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = weiqiaoenchuchou
+                duration = 7300
+            }
+        }
+    }
+
+    a13_3_4 = { # 实至名归的湾区之王
+        icon = mission_approach_throne
+        position = 4
+        required_missions = {
+            a13_3_3
+            a13_4_3
+        }
+        provinces_to_highlight = {
+            OR = {
+                region = alenic_reach_region
+                area = coddorran_heights_area
+                area = westmoor_proper_area
+                area = moorhills_area
+                area = beronmoor_area
+            }
+        }
+        trigger = {
+            # 修正：明确检查该省份组内全部省份均为本国所有。
+            alenic_reach_region = { type = all owned_by = ROOT }
+            # 修正：明确检查该省份组内全部省份均为本国所有。
+            coddorran_heights_area = { type = all owned_by = ROOT }
+            # 修正：明确检查该省份组内全部省份均为本国所有。
+            westmoor_proper_area = { type = all owned_by = ROOT }
+            # 修正：明确检查该省份组内全部省份均为本国所有。
+            moorhills_area = { type = all owned_by = ROOT }
+            # 修正：明确检查该省份组内全部省份均为本国所有。
+            beronmoor_area = { type = all owned_by = ROOT }
+        }
+        effect = {
+            add_country_modifier = {
+                name = quanwanqudezhuren
+                duration = -1
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            wudhal_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            northern_giants_tears_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            southern_giants_tears_area = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+        }
+    }
+
+    a13_3_5 = { # 追剿兽人残党
+        icon = mission_verdant_secret
+        position = 5
+        required_missions = {
+            a13_3_4
+        }
+        provinces_to_highlight = {
+            # 修正：一个省份不会同时属于多个 area；用 OR 高亮其中任意区域。
+            OR = {
+                area = wudhal_area
+                area = northern_giants_tears_area
+                area = southern_giants_tears_area
+            }
+        }
+        trigger = {
+            wudhal_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            northern_giants_tears_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            southern_giants_tears_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = xiangdongjinfa
+                duration = 36500
+            }
+        }
+    }
+
+}
+
+a13_mission_4 = { # 第 4 列
+    slot = 4
+    generic = no
+    ai = yes
+    has_country_shield = yes
+    potential = { tag = A13 }
+
+    a13_4_2 = { # 征服贝维克
+        icon = mission_merchant_trip
+        position = 2
+        required_missions = {
+            a13_3_1
+            a13_5_1
+        }
+        provinces_to_highlight = {
+            area = coast_of_vics_area
+        }
+        trigger = {
+            coast_of_vics_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = tongzhibeiweik
+                duration = 7300
+            }
+        }
+    }
+
+    a13_4_3 = { # 统治蓝湾
+        icon = mission_priest_church
+        position = 3
+        # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
+        # 修正：原稿标题缺少 #；已恢复为注释，避免被解析成脚本。
+        required_missions = {
+            a13_4_2
+        }
+        provinces_to_highlight = {
+            # 修正：一个省份不会同时属于多个 area；用 OR 高亮其中任意区域。
+            OR = {
+                area = serpentshead_area
+                area = coast_of_vics_area
+                area = west_chillsbay_area
+                area = northern_greatwoods_area
+            }
+        }
+        trigger = {
+            serpentshead_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            coast_of_vics_area  = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            west_chillsbay_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+            northern_greatwoods_area = {
+                type = all
+                country_or_non_sovereign_subject_holds = ROOT
+            }
+        }
+        effect = {
+            add_country_modifier = {
+                name = lanwanzhizhu
+                duration = -1
+            }
+        }
+    }
+
+    a13_4_4 = { # 清除毒疮
+        icon = mission_skull
+        position = 4
+        # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
+        required_missions = {
+            a13_4_3
+        }
+        provinces_to_highlight = {
+            # 修正：高亮省份应使用 province_id 条件。
+            # 修正：原稿 8432 不存在；按用户确认改为凯尔马尔多 Celmaldor，省份 696。
+            province_id = 696
+        }
+        trigger = {
+            # 修正：原稿 8432 不存在；按用户确认改为凯尔马尔多 Celmaldor，省份 696。
+            696 = {
+                # 修正：当前 Anbennar 的蓝湾文化代码为 blue_reachman。
+                culture = blue_reachman
+            }
+        }
+        effect = {
+            # 修正：原稿 8432 不存在；按用户确认改为凯尔马尔多 Celmaldor，省份 696。
+            696 = {
+                add_base_tax = 1
+                add_base_production = 2
+                add_base_manpower = 1
+            }
+        }
+    }
+
+    a13_4_5 = { # 加韦德舰队
+        icon = mission_exploration
+        position = 5
+        required_missions = {
+            a13_4_4
+        }
+        provinces_to_highlight = {
+            # 修正：高亮省份应使用 province_id 条件。
+            # 修正：原稿 8432 不存在；按用户确认改为凯尔马尔多 Celmaldor，省份 696。
+            province_id = 696
+        }
+        trigger = {
+            # 修正：原稿 8432 不存在；按用户确认改为凯尔马尔多 Celmaldor，省份 696。
+            development_in_provinces = {
+                value = 20
+                # 修正：development_in_provinces 内是省份筛选条件，改用 province_id。
+                province_id = 696
+            }
+            navy_size =40
+        }
+        effect = {
+            # 修正：将原效果中的 NOT 移入 limit；仅给无核心且无永久宣称的省份加宣称。
+            dalr_region = {
+                limit = {
+                    NOT = { is_permanent_claim = ROOT }
+                    NOT = { is_core = ROOT }
+                }
+                add_permanent_claim = ROOT
+            }
+            # 修正：原国家作用域的孤立宣称行已移入上方省份组。
+        }
+    }
+
+}
+
+a13_mission_5 = { # 第 5 列
+    slot = 5
+    generic = no
+    ai = yes
+    has_country_shield = yes
+    potential = { tag = A13 }
+
+    a13_5_1 = { # 第一次富商议会
+        icon = mission_alliances
+        position = 1
+        provinces_to_highlight = { }
+        trigger = {
+            has_mil_advisor_2 = yes
+            has_adm_advisor_2 = yes
+            # 修正：原稿重复检查军事顾问；此处改为外交顾问，三类顾问均须至少二级。
+            has_dip_advisor_2 = yes
+            estate_loyalty = {
+                estate = estate_burghers
+                loyalty = 60
+            }
+            has_estate_privilege = estate_burghers_magnate_council
+        }
+        effect = {
+            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+        }
+    }
+
+    a13_5_2 = { # 国王的左膀右臂
+        icon = mission_monarch_diplomacy
+        position = 2
+        required_missions = {
+            a13_5_1
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            government_rank = 2
+            adm_power = 100
+        }
+        effect = {
+            add_adm_power = -100
+        }
+    }
+
+    a13_5_3 = { # 不得不面对之人
+        icon = unite_the_wittelsbachs
+        position = 3
+        # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
+        required_missions = {
+            a13_5_2
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            # 修正：原 if 缺少 limit，else 也未正确闭合；按影响力 50 的原分支意图整理。
+            if = {
+                limit = { estate_influence = { estate = estate_nobles influence = 50 } }
+                has_estate_privilege = estate_nobles_supremacy_over_crown
+                treasury = 200
+            }
+            else = {
+                NOT = { num_of_estate_privileges = { estate = estate_nobles value = 2 } }
+            }
+            # 提醒：200 金币只作检查；原稿没有扣款奖励，故此处不增加扣款。
+        }
+        effect = {
+            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+        }
+    }
+
+    a13_5_4 = { # 威利亚姆的大围猎
+        icon = sav_union_with_naples
+        position = 4
+        required_missions = {
+            a13_5_3
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            diplomatic_reputation = 2
+            # 待确认：按原稿保留本国独立倾向 < 50；未擅自改成检查全部属国。
+            NOT = { liberty_desire = 50 }
+            # 修正：calc_ture_if 拼错；关系条件须和同盟条件一起放入被计数的国家作用域。
+            calc_true_if = {
+                amount = 2
+                all_country = {
+                    # 修正：OR 将整组条件作为一次布尔判断，避免数值条件重复计数。
+                    OR = {
+                        AND = {
+                            alliance_with = ROOT
+                            has_opinion = { who = ROOT value = 150 }
+                        }
+                    }
+                }
+            }
+        }
+        effect = {
+            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+        }
+    }
+
+    a13_5_5 = { # 威利亚姆之治
+        icon = mission_arabian_thalassocracy
+        position = 5
+        required_missions = {
+            a13_5_4
+        }
+        provinces_to_highlight = { }
+        trigger = {
+            # 修正：every_owned_province 是效果作用域；条件改为 all_owned_province。
+            all_owned_province = {
+                # 修正：非直属州省份不参与检查；直属州省份须维持原稿的自治度 < 15。
+                OR = { is_state = no NOT = { local_autonomy = 15 } }
+            }
+            # 修正：trade_income 不是有效条件；按原稿数值检查每月贸易收入至少 8。
+            monthly_trade_income = 8
+            is_at_war = no
+            stability = 2
+        }
+        effect = {
+            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+        }
+    }
+
+}

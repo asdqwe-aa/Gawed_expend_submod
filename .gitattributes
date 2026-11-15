@@ -3,3 +3,6 @@
 *.yml -text
 *.gui -text
 *.gfx -text
+# 保留用户禁用文件和原稿的原始字节，避免 Git 自动转换换行。
+missions/Gawedi_Missions.txt -text
+制作源文件/*用户原稿.txt -text
