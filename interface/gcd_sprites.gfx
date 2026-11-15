@@ -1,0 +1,7 @@
+spriteTypes = {
+    spriteType = { name = "GFX_gcd_frame" texturefile = "gfx/interface/gcd_frame.dds" noOfFrames = 1 }
+    spriteType = { name = "GFX_gcd_map" texturefile = "gfx/interface/gcd_map.dds" noOfFrames = 1 }
+    spriteType = { name = "GFX_gcd_diamond" texturefile = "gfx/interface/gcd_diamond.dds" noOfFrames = 2 }
+    spriteType = { name = "GFX_gcd_star" texturefile = "gfx/interface/gcd_star.dds" noOfFrames = 1 }
+    spriteType = { name = "GFX_gcd_close" texturefile = "gfx/interface/gcd_close.dds" noOfFrames = 1 }
+}

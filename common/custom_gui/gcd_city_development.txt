@@ -1,0 +1,497 @@
+# 城市发展署的可见性、点击与提示逻辑。
+# 入口按钮和全屏锚点挂在经济界面 countryeconomyview 内。
+# 仅通过“发展署”按钮切换窗口；首次点击同时初始化加韦顿。
+# custom_gui 的当前作用域是玩家国家；先确认 ROOT 存在，再读取本国旗标。
+custom_button = {
+    name = gcd_gui_open
+    # 入口位于经济页右上角，保留原有按钮样式。
+    # 只有加韦德玩家能够点击；其他国家只会看到灰色入口。
+    potential = { always = yes }
+    trigger = { exists = yes tag = A13 ai = no }
+    effect = {
+        if = { limit = { has_country_flag = gcd_window_open } clr_country_flag = gcd_window_open }
+        else = {
+            if = {
+                limit = { NOT = { has_country_flag = gcd_city_initialized } }
+                set_country_flag = gcd_city_initialized
+                gcd_gaweton_set_level_1 = yes
+            }
+            gcd_clear_city_selection = yes
+            set_country_flag = gcd_gaweton_selected
+            set_country_flag = gcd_window_open
+        }
+    }
+    tooltip = gcd_entry_tooltip
+}
+custom_window = {
+    name = gcd_city_anchor
+    potential = { exists = ROOT exists = yes ai = no has_country_flag = gcd_window_open }
+}
+custom_window = {
+    name = gcd_city_window
+    potential = { exists = ROOT exists = yes ai = no }
+}
+custom_button = {
+    name = gcd_close
+    potential = { exists = ROOT exists = yes }
+    trigger = { exists = yes }
+    effect = { clr_country_flag = gcd_window_open }
+    tooltip = gcd_close_tooltip
+}
+
+
+# 君王港：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_kingsport_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_kingsport_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_kingsport_selected }
+    tooltip = gcd_kingsport_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_kingsport_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_kingsport_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_kingsport_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_kingsport_title potential = { has_country_flag = gcd_kingsport_selected } }
+custom_text_box = { name = gcd_kingsport_intro potential = { has_country_flag = gcd_kingsport_selected } }
+
+custom_text_box = { name = gcd_kingsport_level_1_text potential = { has_country_flag = gcd_kingsport_selected } }
+custom_icon = {
+    name = gcd_kingsport_star_1
+    potential = { has_country_flag = gcd_kingsport_selected has_country_flag = gcd_kingsport_level_1 }
+}
+
+custom_text_box = { name = gcd_kingsport_level_2_text potential = { has_country_flag = gcd_kingsport_selected } }
+custom_icon = {
+    name = gcd_kingsport_star_2
+    potential = { has_country_flag = gcd_kingsport_selected has_country_flag = gcd_kingsport_level_2 }
+}
+
+custom_text_box = { name = gcd_kingsport_level_3_text potential = { has_country_flag = gcd_kingsport_selected } }
+custom_icon = {
+    name = gcd_kingsport_star_3
+    potential = { has_country_flag = gcd_kingsport_selected has_country_flag = gcd_kingsport_level_3 }
+}
+
+# 阿申海斯：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_kelmaldor_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_kelmaldor_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_kelmaldor_selected }
+    tooltip = gcd_kelmaldor_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_kelmaldor_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_kelmaldor_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_kelmaldor_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_kelmaldor_title potential = { has_country_flag = gcd_kelmaldor_selected } }
+custom_text_box = { name = gcd_kelmaldor_intro potential = { has_country_flag = gcd_kelmaldor_selected } }
+
+custom_text_box = { name = gcd_kelmaldor_level_1_text potential = { has_country_flag = gcd_kelmaldor_selected } }
+custom_icon = {
+    name = gcd_kelmaldor_star_1
+    potential = { has_country_flag = gcd_kelmaldor_selected has_country_flag = gcd_kelmaldor_level_1 }
+}
+
+custom_text_box = { name = gcd_kelmaldor_level_2_text potential = { has_country_flag = gcd_kelmaldor_selected } }
+custom_icon = {
+    name = gcd_kelmaldor_star_2
+    potential = { has_country_flag = gcd_kelmaldor_selected has_country_flag = gcd_kelmaldor_level_2 }
+}
+
+custom_text_box = { name = gcd_kelmaldor_level_3_text potential = { has_country_flag = gcd_kelmaldor_selected } }
+custom_icon = {
+    name = gcd_kelmaldor_star_3
+    potential = { has_country_flag = gcd_kelmaldor_selected has_country_flag = gcd_kelmaldor_level_3 }
+}
+
+# 贝维克：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_bevik_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_bevik_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_bevik_selected }
+    tooltip = gcd_bevik_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_bevik_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_bevik_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_bevik_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_bevik_title potential = { has_country_flag = gcd_bevik_selected } }
+custom_text_box = { name = gcd_bevik_intro potential = { has_country_flag = gcd_bevik_selected } }
+
+custom_text_box = { name = gcd_bevik_level_1_text potential = { has_country_flag = gcd_bevik_selected } }
+custom_icon = {
+    name = gcd_bevik_star_1
+    potential = { has_country_flag = gcd_bevik_selected has_country_flag = gcd_bevik_level_1 }
+}
+
+custom_text_box = { name = gcd_bevik_level_2_text potential = { has_country_flag = gcd_bevik_selected } }
+custom_icon = {
+    name = gcd_bevik_star_2
+    potential = { has_country_flag = gcd_bevik_selected has_country_flag = gcd_bevik_level_2 }
+}
+
+custom_text_box = { name = gcd_bevik_level_3_text potential = { has_country_flag = gcd_bevik_selected } }
+custom_icon = {
+    name = gcd_bevik_star_3
+    potential = { has_country_flag = gcd_bevik_selected has_country_flag = gcd_bevik_level_3 }
+}
+
+# 永冻堡：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_everfrost_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_everfrost_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_everfrost_selected }
+    tooltip = gcd_everfrost_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_everfrost_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_everfrost_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_everfrost_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_everfrost_title potential = { has_country_flag = gcd_everfrost_selected } }
+custom_text_box = { name = gcd_everfrost_intro potential = { has_country_flag = gcd_everfrost_selected } }
+
+custom_text_box = { name = gcd_everfrost_level_1_text potential = { has_country_flag = gcd_everfrost_selected } }
+custom_icon = {
+    name = gcd_everfrost_star_1
+    potential = { has_country_flag = gcd_everfrost_selected has_country_flag = gcd_everfrost_level_1 }
+}
+
+custom_text_box = { name = gcd_everfrost_level_2_text potential = { has_country_flag = gcd_everfrost_selected } }
+custom_icon = {
+    name = gcd_everfrost_star_2
+    potential = { has_country_flag = gcd_everfrost_selected has_country_flag = gcd_everfrost_level_2 }
+}
+
+custom_text_box = { name = gcd_everfrost_level_3_text potential = { has_country_flag = gcd_everfrost_selected } }
+custom_icon = {
+    name = gcd_everfrost_star_3
+    potential = { has_country_flag = gcd_everfrost_selected has_country_flag = gcd_everfrost_level_3 }
+}
+
+# 布朗泰角：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_bruntei_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_bruntei_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_bruntei_selected }
+    tooltip = gcd_bruntei_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_bruntei_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_bruntei_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_bruntei_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_bruntei_title potential = { has_country_flag = gcd_bruntei_selected } }
+custom_text_box = { name = gcd_bruntei_intro potential = { has_country_flag = gcd_bruntei_selected } }
+
+custom_text_box = { name = gcd_bruntei_level_1_text potential = { has_country_flag = gcd_bruntei_selected } }
+custom_icon = {
+    name = gcd_bruntei_star_1
+    potential = { has_country_flag = gcd_bruntei_selected has_country_flag = gcd_bruntei_level_1 }
+}
+
+custom_text_box = { name = gcd_bruntei_level_2_text potential = { has_country_flag = gcd_bruntei_selected } }
+custom_icon = {
+    name = gcd_bruntei_star_2
+    potential = { has_country_flag = gcd_bruntei_selected has_country_flag = gcd_bruntei_level_2 }
+}
+
+custom_text_box = { name = gcd_bruntei_level_3_text potential = { has_country_flag = gcd_bruntei_selected } }
+custom_icon = {
+    name = gcd_bruntei_star_3
+    potential = { has_country_flag = gcd_bruntei_selected has_country_flag = gcd_bruntei_level_3 }
+}
+
+# 加韦顿：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_gaweton_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_gaweton_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_gaweton_selected }
+    tooltip = gcd_gaweton_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_gaweton_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_gaweton_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_gaweton_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_gaweton_title potential = { has_country_flag = gcd_gaweton_selected } }
+custom_text_box = { name = gcd_gaweton_intro potential = { has_country_flag = gcd_gaweton_selected } }
+
+custom_text_box = { name = gcd_gaweton_level_1_text potential = { has_country_flag = gcd_gaweton_selected } }
+custom_icon = {
+    name = gcd_gaweton_star_1
+    potential = { has_country_flag = gcd_gaweton_selected has_country_flag = gcd_gaweton_level_1 }
+}
+
+custom_text_box = { name = gcd_gaweton_level_2_text potential = { has_country_flag = gcd_gaweton_selected } }
+custom_icon = {
+    name = gcd_gaweton_star_2
+    potential = { has_country_flag = gcd_gaweton_selected has_country_flag = gcd_gaweton_level_2 }
+}
+
+custom_text_box = { name = gcd_gaweton_level_3_text potential = { has_country_flag = gcd_gaweton_selected } }
+custom_icon = {
+    name = gcd_gaweton_star_3
+    potential = { has_country_flag = gcd_gaweton_selected has_country_flag = gcd_gaweton_level_3 }
+}
+
+# 艾伦沃德：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_alenard_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_alenard_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_alenard_selected }
+    tooltip = gcd_alenard_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_alenard_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_alenard_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_alenard_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_alenard_title potential = { has_country_flag = gcd_alenard_selected } }
+custom_text_box = { name = gcd_alenard_intro potential = { has_country_flag = gcd_alenard_selected } }
+
+custom_text_box = { name = gcd_alenard_level_1_text potential = { has_country_flag = gcd_alenard_selected } }
+custom_icon = {
+    name = gcd_alenard_star_1
+    potential = { has_country_flag = gcd_alenard_selected has_country_flag = gcd_alenard_level_1 }
+}
+
+custom_text_box = { name = gcd_alenard_level_2_text potential = { has_country_flag = gcd_alenard_selected } }
+custom_icon = {
+    name = gcd_alenard_star_2
+    potential = { has_country_flag = gcd_alenard_selected has_country_flag = gcd_alenard_level_2 }
+}
+
+custom_text_box = { name = gcd_alenard_level_3_text potential = { has_country_flag = gcd_alenard_selected } }
+custom_icon = {
+    name = gcd_alenard_star_3
+    potential = { has_country_flag = gcd_alenard_selected has_country_flag = gcd_alenard_level_3 }
+}
+
+# 沼泽堡：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_marshfort_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_marshfort_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_marshfort_selected }
+    tooltip = gcd_marshfort_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_marshfort_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_marshfort_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_marshfort_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_marshfort_title potential = { has_country_flag = gcd_marshfort_selected } }
+custom_text_box = { name = gcd_marshfort_intro potential = { has_country_flag = gcd_marshfort_selected } }
+
+custom_text_box = { name = gcd_marshfort_level_1_text potential = { has_country_flag = gcd_marshfort_selected } }
+custom_icon = {
+    name = gcd_marshfort_star_1
+    potential = { has_country_flag = gcd_marshfort_selected has_country_flag = gcd_marshfort_level_1 }
+}
+
+custom_text_box = { name = gcd_marshfort_level_2_text potential = { has_country_flag = gcd_marshfort_selected } }
+custom_icon = {
+    name = gcd_marshfort_star_2
+    potential = { has_country_flag = gcd_marshfort_selected has_country_flag = gcd_marshfort_level_2 }
+}
+
+custom_text_box = { name = gcd_marshfort_level_3_text potential = { has_country_flag = gcd_marshfort_selected } }
+custom_icon = {
+    name = gcd_marshfort_star_3
+    potential = { has_country_flag = gcd_marshfort_selected has_country_flag = gcd_marshfort_level_3 }
+}
+
+# 鹰冠：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_eaglecrest_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_eaglecrest_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_eaglecrest_selected }
+    tooltip = gcd_eaglecrest_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_eaglecrest_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_eaglecrest_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_eaglecrest_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_eaglecrest_title potential = { has_country_flag = gcd_eaglecrest_selected } }
+custom_text_box = { name = gcd_eaglecrest_intro potential = { has_country_flag = gcd_eaglecrest_selected } }
+
+custom_text_box = { name = gcd_eaglecrest_level_1_text potential = { has_country_flag = gcd_eaglecrest_selected } }
+custom_icon = {
+    name = gcd_eaglecrest_star_1
+    potential = { has_country_flag = gcd_eaglecrest_selected has_country_flag = gcd_eaglecrest_level_1 }
+}
+
+custom_text_box = { name = gcd_eaglecrest_level_2_text potential = { has_country_flag = gcd_eaglecrest_selected } }
+custom_icon = {
+    name = gcd_eaglecrest_star_2
+    potential = { has_country_flag = gcd_eaglecrest_selected has_country_flag = gcd_eaglecrest_level_2 }
+}
+
+custom_text_box = { name = gcd_eaglecrest_level_3_text potential = { has_country_flag = gcd_eaglecrest_selected } }
+custom_icon = {
+    name = gcd_eaglecrest_star_3
+    potential = { has_country_flag = gcd_eaglecrest_selected has_country_flag = gcd_eaglecrest_level_3 }
+}
+
+# 维特斯克：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_vertesk_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_vertesk_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_vertesk_selected }
+    tooltip = gcd_vertesk_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_vertesk_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_vertesk_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_vertesk_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_vertesk_title potential = { has_country_flag = gcd_vertesk_selected } }
+custom_text_box = { name = gcd_vertesk_intro potential = { has_country_flag = gcd_vertesk_selected } }
+
+custom_text_box = { name = gcd_vertesk_level_1_text potential = { has_country_flag = gcd_vertesk_selected } }
+custom_icon = {
+    name = gcd_vertesk_star_1
+    potential = { has_country_flag = gcd_vertesk_selected has_country_flag = gcd_vertesk_level_1 }
+}
+
+custom_text_box = { name = gcd_vertesk_level_2_text potential = { has_country_flag = gcd_vertesk_selected } }
+custom_icon = {
+    name = gcd_vertesk_star_2
+    potential = { has_country_flag = gcd_vertesk_selected has_country_flag = gcd_vertesk_level_2 }
+}
+
+custom_text_box = { name = gcd_vertesk_level_3_text potential = { has_country_flag = gcd_vertesk_selected } }
+custom_icon = {
+    name = gcd_vertesk_star_3
+    potential = { has_country_flag = gcd_vertesk_selected has_country_flag = gcd_vertesk_level_3 }
+}
+
+# 艾伦纳斯：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_alenas_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_alenas_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_alenas_selected }
+    tooltip = gcd_alenas_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_alenas_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_alenas_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_alenas_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_alenas_title potential = { has_country_flag = gcd_alenas_selected } }
+custom_text_box = { name = gcd_alenas_intro potential = { has_country_flag = gcd_alenas_selected } }
+
+custom_text_box = { name = gcd_alenas_level_1_text potential = { has_country_flag = gcd_alenas_selected } }
+custom_icon = {
+    name = gcd_alenas_star_1
+    potential = { has_country_flag = gcd_alenas_selected has_country_flag = gcd_alenas_level_1 }
+}
+
+custom_text_box = { name = gcd_alenas_level_2_text potential = { has_country_flag = gcd_alenas_selected } }
+custom_icon = {
+    name = gcd_alenas_star_2
+    potential = { has_country_flag = gcd_alenas_selected has_country_flag = gcd_alenas_level_2 }
+}
+
+custom_text_box = { name = gcd_alenas_level_3_text potential = { has_country_flag = gcd_alenas_selected } }
+custom_icon = {
+    name = gcd_alenas_star_3
+    potential = { has_country_flag = gcd_alenas_selected has_country_flag = gcd_alenas_level_3 }
+}
+
+# 新边区：开放的城市可以点击；第二帧红色表示当前选中。
+custom_button = {
+    name = gcd_newfrontier_button
+    potential = { exists = ROOT exists = yes has_country_flag = gcd_newfrontier_unlocked }
+    trigger = { exists = yes }
+    effect = { gcd_clear_city_selection = yes set_country_flag = gcd_newfrontier_selected }
+    tooltip = gcd_newfrontier_select_tooltip
+    frame = { number = 2 trigger = { has_country_flag = gcd_newfrontier_selected } }
+    frame = { number = 1 trigger = { always = yes } }
+}
+custom_button = {
+    name = gcd_newfrontier_locked
+    potential = { exists = ROOT exists = yes NOT = { has_country_flag = gcd_newfrontier_unlocked } }
+    trigger = { exists = yes }
+    effect = { }
+    tooltip = gcd_locked_tooltip
+}
+custom_text_box = { name = gcd_newfrontier_title potential = { has_country_flag = gcd_newfrontier_selected } }
+custom_text_box = { name = gcd_newfrontier_intro potential = { has_country_flag = gcd_newfrontier_selected } }
+
+custom_text_box = { name = gcd_newfrontier_level_1_text potential = { has_country_flag = gcd_newfrontier_selected } }
+custom_icon = {
+    name = gcd_newfrontier_star_1
+    potential = { has_country_flag = gcd_newfrontier_selected has_country_flag = gcd_newfrontier_level_1 }
+}
+
+custom_text_box = { name = gcd_newfrontier_level_2_text potential = { has_country_flag = gcd_newfrontier_selected } }
+custom_icon = {
+    name = gcd_newfrontier_star_2
+    potential = { has_country_flag = gcd_newfrontier_selected has_country_flag = gcd_newfrontier_level_2 }
+}
+
+custom_text_box = { name = gcd_newfrontier_level_3_text potential = { has_country_flag = gcd_newfrontier_selected } }
+custom_icon = {
+    name = gcd_newfrontier_star_3
+    potential = { has_country_flag = gcd_newfrontier_selected has_country_flag = gcd_newfrontier_level_3 }
+}

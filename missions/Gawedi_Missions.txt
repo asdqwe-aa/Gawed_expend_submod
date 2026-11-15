@@ -1,0 +1,424 @@
+﻿a13_mission_1 = { #第一列
+	slot = 1
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A13 } 
+
+	a13_1_1 = { #煽动半身人
+		icon = contracts_of_correspondence
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			A01 = {
+				has_spy_network_from = {
+					who = ROOT 
+					value = 25
+				}
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：bumandebanshenren，原定持续 7300 天。
+            custom_tooltip = gawed_draft_reward_bumandebanshenren
+
+		 } 
+	}
+}
+a13_mission_2 = { #第二列
+	slot = 2
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A13 } 
+
+	a13_2_1 = { #对帝国让步
+		icon = mission_sunyanin
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			custom_trigger_tooltip = { tooltip = gawed_draft_opinion_pending always = no }
+		 } 
+
+		effect = {  } 
+	}
+
+	a13_2_2 = { #雄鹰与海葵骑士
+		icon = mission_diplomacy_missive
+		position = 2
+		required_missions = {
+			a13_1_1
+			a13_2_1
+		}
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			A02 = {
+				has_opinion = {
+					who = ROOT
+					value = 75
+				}
+			}
+		 } 
+
+		effect = {  } 
+	}
+
+	a13_2_3 = { #千年恩怨新篇章
+		icon = protect_against_austria
+		position = 3
+		required_missions = { a13_2_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			A01 = {
+				war_with = ROOT
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：ailunruqin，原定持续 7300 天。
+            custom_tooltip = gawed_draft_reward_ailunruqin
+
+		 } 
+	}
+
+	a13_2_4 = { #战胜玫瑰
+		icon = mission_unite_home_region
+		position = 4
+		required_missions = { a13_2_3 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { 
+			A13 = {
+				war_score_against = {
+					who = A01
+					value = 75
+				}
+			}
+		 } 
+
+		effect = {  } 
+	}
+
+	a13_2_5 = { #掌控坎诺粮仓
+		icon = mission_redfoot
+		position = 5
+		required_missions = { a13_2_4 } 
+		provinces_to_highlight = { 
+			region = small_country_region
+		 } 
+
+		trigger = { 
+			small_country_region = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = {  } 
+	}
+
+	a13_2_6 = {
+		icon = mission_vrorenmarch_kingdom
+		position = 6
+		required_missions = { a13_2_5 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+}
+a13_mission_3 = { #第三列
+	slot = 3
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A13 } 
+
+	a13_3_1 = { #利用北方旧怨
+		icon = mission_confrontation
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = { 
+			serpentshead_area = { add_permanent_claim = ROOT }
+			coast_of_vics_area = { add_permanent_claim = ROOT }
+			west_chillsbay_area = { add_permanent_claim = ROOT }
+			northern_greatwoods_area = { add_permanent_claim = ROOT }
+		 } 
+	}
+
+	a13_3_2 = { #克洛维之诗
+		icon = mission_impaled_soldies
+		position = 2
+		required_missions = { a13_3_1 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+
+	a13_3_3 = { #兽人暴政终结
+		icon = mission_horse_siege
+		position = 3
+		required_missions = { a13_3_2 } 
+		provinces_to_highlight = { 
+			OR = {
+				area =east_chillsbay_area
+				area = sondaar_area
+				area = cedesck_area
+			}
+		 } 
+
+		trigger = { 
+			east_chillsbay_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			sondaar_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			cedesck_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：weiqiaoenchuchou，原定持续 7300 天。
+            custom_tooltip = gawed_draft_reward_weiqiaoenchuchou
+		 } 
+	}
+
+	a13_3_4 = { #实至名归的湾区之王
+		icon = mission_approach_throne
+		position = 4
+		required_missions = {
+			a13_3_3
+			a13_4_3
+		}
+		provinces_to_highlight = { 
+			OR = {
+				region = alenic_reach_region
+				area = coddorran_heights_area
+				area = westmoor_proper_area
+				area = moorhills_area
+				area = beronmoor_area
+			}
+		 } 
+
+		trigger = { 
+			alenic_reach_region = {
+				type = all
+				owned_by = ROOT
+			}
+			coddorran_heights_area = {
+				type = all
+				owned_by = ROOT
+			}
+			westmoor_proper_area = {
+				type = all
+				owned_by = ROOT
+			}
+			moorhills_area = {
+				type = all
+				owned_by = ROOT
+			}
+			beronmoor_area = {
+				type = all
+				owned_by = ROOT
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：quanwanqudezhuren，原定持续 -1 天。
+            custom_tooltip = gawed_draft_reward_quanwanqudezhuren
+		 } 
+	}
+
+	a13_3_5 = { #追剿兽人残党
+		icon = mission_verdant_secret
+		position = 5
+		required_missions = { a13_3_4 } 
+		provinces_to_highlight = { 
+			OR = { area = wudhal_area area = northern_giants_tears_area area = southern_giants_tears_area }
+			}
+
+		trigger = { 
+			wudhal_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_giants_tears_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			southern_giants_tears_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：xiangdongjinfa，原定持续 3650 天。
+            custom_tooltip = gawed_draft_reward_xiangdongjinfa
+		 } 
+	}
+}
+a13_mission_4 = { #第四列
+	slot = 4
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A13 } 
+
+	a13_4_2 = { #征服贝维克
+		icon = mission_merchant_trip
+		position = 2
+		required_missions = {
+			a13_3_1
+			a13_5_1
+		}
+		provinces_to_highlight = { 
+			area = coast_of_vics_area
+		 } 
+
+		trigger = { 
+			coast_of_vics_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：tongzhibeiweik，原定持续 7300 天。
+            custom_tooltip = gawed_draft_reward_tongzhibeiweik
+		 } 
+	}
+
+	a13_4_3 = { #统治蓝湾
+		icon = mission_priest_church
+		position = 3
+		required_missions = { a13_4_2 } 
+		provinces_to_highlight = { 
+			OR = { area = serpentshead_area area = coast_of_vics_area area = west_chillsbay_area area = northern_greatwoods_area }
+		 } 
+
+		trigger = { 
+			serpentshead_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			coast_of_vics_area  = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			west_chillsbay_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+			northern_greatwoods_area = {
+				type = all
+				country_or_non_sovereign_subject_holds = ROOT
+			}
+		 } 
+
+		effect = { 
+			# 待补修正定义：lanwanzhizhu，原定持续 7300 天。
+            custom_tooltip = gawed_draft_reward_lanwanzhizhu 
+	}
+
+}
+	a13_4_4 = { #清除毒疮
+		icon = mission_skull
+		position = 4
+		required_missions = { a13_4_3 } 
+		provinces_to_highlight = { 
+			province_id = 8432
+		 } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+
+	a13_4_5 = { #加韦德舰队
+		icon = mission_exploration
+		position = 5
+		required_missions = { a13_4_4 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+}
+a13_mission_5 = { #第五列
+	slot = 5
+	generic = no
+	ai = yes
+	has_country_shield = yes
+	potential = { tag = A13 } 
+
+	a13_5_1 = {
+		icon = mission_alliances
+		position = 1
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+
+	a13_5_2 = {
+		icon = mission_monarch_diplomacy
+		position = 2
+		required_missions = { a13_5_1 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+
+	a13_5_3 = {
+		icon = unite_the_wittelsbachs
+		position = 3
+		required_missions = { a13_5_2 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+
+	a13_5_4 = {
+		icon = sav_union_with_naples
+		position = 4
+		required_missions = { a13_5_3 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+
+	a13_5_5 = {
+		icon = mission_arabian_thalassocracy
+		position = 5
+		required_missions = { a13_5_4 } 
+		provinces_to_highlight = {  } 
+
+		trigger = { custom_trigger_tooltip = { tooltip = gawed_draft_condition_pending always = no } } 
+
+		effect = {  } 
+	}
+}

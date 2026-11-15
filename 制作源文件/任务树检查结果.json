@@ -1,0 +1,36 @@
+{
+  "missions": 21,
+  "unfinished_conditions_blocked": 10,
+  "undefined_modifiers_deferred": [
+    [
+      "bumandebanshenren",
+      "7300"
+    ],
+    [
+      "ailunruqin",
+      "7300"
+    ],
+    [
+      "weiqiaoenchuchou",
+      "7300"
+    ],
+    [
+      "quanwanqudezhuren",
+      "-1"
+    ],
+    [
+      "xiangdongjinfa",
+      "3650"
+    ],
+    [
+      "tongzhibeiweik",
+      "7300"
+    ],
+    [
+      "lanwanzhizhu",
+      "7300"
+    ]
+  ],
+  "fallback_icons": [],
+  "note": "同名覆盖 Anbennar 的 Gawedi_Missions.txt，避免原加韦德五列同时出现。"
+}

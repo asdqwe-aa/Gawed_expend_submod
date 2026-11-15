@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1460" height="812" viewBox="0 0 1460 812">
+<defs><linearGradient id="bg" x2="0" y2="1"><stop stop-color="#283b40"/><stop offset="1" stop-color="#18262e"/></linearGradient><linearGradient id="bar"><stop stop-color="#14392f"/><stop offset="0.5" stop-color="#28624a"/><stop offset="1" stop-color="#14392f"/></linearGradient></defs>
+<rect x="3" y="3" width="1454" height="806" rx="13" fill="url(#bg)" stroke="#a58a5a" stroke-width="6"/>
+<rect x="9" y="9" width="1442" height="794" rx="9" fill="none" stroke="#514b34" stroke-width="3"/>
+<rect x="17" y="10" width="1426" height="39" rx="5" fill="url(#bar)" stroke="#bea66b" stroke-width="2"/>
+<path d="M 60,49 H 1398" stroke="#927a4d" stroke-width="2"/>
+<rect x="19" y="52" width="906" height="751" fill="#10242a" stroke="#9b875c" stroke-width="3"/>
+<rect x="937" y="54" width="502" height="748" rx="5" fill="#203039" stroke="#a58b5c" stroke-width="3"/>
+<rect x="952" y="70" width="471" height="60" rx="3" fill="#183f39" stroke="#756b4f" stroke-width="2"/>
+<rect x="952" y="140" width="471" height="211" rx="3" fill="#1a2b33" stroke="#675d48" stroke-width="2"/>
+<path d="M 970,142 H 1407 M 970,353 H 1407" stroke="#a08655" stroke-width="1.5"/>
+<text x="972" y="166" font-family="Noto Serif CJK SC" font-size="20" fill="#d9c79c">城市介绍</text>
+<text x="972" y="386" font-family="Noto Serif CJK SC" font-size="19" fill="#d9c79c">城市发展计划</text>
+<rect x="954" y="398" width="467" height="116" rx="4" fill="#253940" stroke="#a38b60" stroke-width="2"/>
+<rect x="954" y="528" width="467" height="116" rx="4" fill="#253940" stroke="#a38b60" stroke-width="2"/>
+<rect x="954" y="658" width="467" height="116" rx="4" fill="#253940" stroke="#a38b60" stroke-width="2"/>
+<path d="M 964,401 H 1411 M 964,531 H 1411 M 964,661 H 1411" stroke="#c5a867" stroke-width="1.5"/>
+<path d="M 23,23 H 260 M 1200,23 H 1402" stroke="#bba36c" stroke-width="1" opacity="0.8"/>
+</svg>

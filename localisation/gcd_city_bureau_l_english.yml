@@ -1,0 +1,78 @@
+﻿l_english:
+ gcd_header:0 "Œ‚&O^ýVÎW^ÑSUSr"
+ gcd_entry_button_label:0 "ÑSUSr"
+ gcd_entry_tooltip:0 "SbVbsQí•Œ‚&O^ýVÎW^ÑSUSr"
+ gcd_close_tooltip:0 "sQí•ÎW^ÑSUSr"
+ gcd_locked_tooltip:0 "ÑSUS¡‹R*glQ^"
+ gcd_kingsport_select_tooltip:0 "ågwT‹s=n„vÑSUS¡‹R"
+ gcd_kingsport_title:0 "T‹s=n"
+ gcd_kingsport_intro:0 "T‹s=n„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_kingsport_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_kingsport_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_kingsport_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_kelmaldor_select_tooltip:0 "ågw?–3uwm¯e„vÑSUS¡‹R"
+ gcd_kelmaldor_title:0 "?–3uwm¯e"
+ gcd_kelmaldor_intro:0 "?–3uwm¯e„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_kelmaldor_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_kelmaldor_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_kelmaldor_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_bevik_select_tooltip:0 "ågwôuKQ„vÑSUS¡‹R"
+ gcd_bevik_title:0 "ôuKQ"
+ gcd_bevik_intro:0 "ôuKQ„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_bevik_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_bevik_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_bevik_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_everfrost_select_tooltip:0 "ågw8l»Q/X„vÑSUS¡‹R"
+ gcd_everfrost_title:0 "8l»Q/X"
+ gcd_everfrost_intro:0 "8l»Q/X„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_everfrost_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_everfrost_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_everfrost_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_bruntei_select_tooltip:0 "ågw^gðlÒ‰„vÑSUS¡‹R"
+ gcd_bruntei_title:0 "^gðlÒ‰"
+ gcd_bruntei_intro:0 "^gðlÒ‰„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_bruntei_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_bruntei_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_bruntei_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_gaweton_select_tooltip:0 "ågw Ræ—˜„vÑSUS¡‹R"
+ gcd_gaweton_title:0 " Ræ—˜"
+ gcd_gaweton_intro:0 " Ræ—˜„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_gaweton_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_gaweton_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_gaweton_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_alenard_select_tooltip:0 "ågwŒ‚&Oƒl·V„vÑSUS¡‹R"
+ gcd_alenard_title:0 "Œ‚&Oƒl·V"
+ gcd_alenard_intro:0 "Œ‚&Oƒl·V„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_alenard_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_alenard_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_alenard_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_marshfort_select_tooltip:0 "ågw¼lýl/X„vÑSUS¡‹R"
+ gcd_marshfort_title:0 "¼lýl/X"
+ gcd_marshfort_intro:0 "¼lýl/X„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_marshfort_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_marshfort_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_marshfort_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_eaglecrest_select_tooltip:0 "ågwpž Q„vÑSUS¡‹R"
+ gcd_eaglecrest_title:0 "pž Q"
+ gcd_eaglecrest_intro:0 "pž Q„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_eaglecrest_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_eaglecrest_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_eaglecrest_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_vertesk_select_tooltip:0 "ågwôuyr¯eKQ„vÑSUS¡‹R"
+ gcd_vertesk_title:0 "ôuyr¯eKQ"
+ gcd_vertesk_intro:0 "ôuyr¯eKQ„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_vertesk_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_vertesk_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_vertesk_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_alenas_select_tooltip:0 "ågwŒ‚&O³u¯e„vÑSUS¡‹R"
+ gcd_alenas_title:0 "Œ‚&O³u¯e"
+ gcd_alenas_intro:0 "Œ‚&O³u¯e„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_alenas_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_alenas_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_alenas_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_newfrontier_select_tooltip:0 "ågw°e¹HS„vÑSUS¡‹R"
+ gcd_newfrontier_title:0 "°e¹HS"
+ gcd_newfrontier_intro:0 "°e¹HS„vÎW^ËNÍu…VkX™Q0\nÙÌ‘SUSHyÎW^„v†SòS0°s¶rN^ýVÑSUSÄ‰R0"
+ gcd_newfrontier_level_1_text:0 "1µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_newfrontier_level_2_text:0 "2µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"
+ gcd_newfrontier_level_3_text:0 "3µuÿÑSUSHeœg…VkX™Q0\n÷‹(WdkYeˆEQå‹Irµu„vwQSO…Q¹R0"

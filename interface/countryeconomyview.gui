@@ -1,0 +1,1923 @@
+guiTypes = {
+
+	windowType = {
+		name = "countryeconomyview"
+		#position = { x=0 y=140 }	
+		position = { x=-600 y=140 }	
+		show_position = { x=0 y =140 }
+		hide_position = { x=-600 y =140 }	
+		animation_type = "decelerated"
+		animation_time = 300	
+		size = { x=1024 y=100 }
+		moveable = 0
+		Orientation = "UPPER_LEFT"
+		
+		upsound = tab_economy
+		
+		iconType =
+		{
+			name ="background"
+			spriteType = "GFX_economy_view_bg"
+			position = { x= -7 y = -10 }
+			Orientation = "UPPER_LEFT"
+
+		}
+		
+		iconType =
+		{
+			name ="topGold"
+			spriteType = "GFX_country_economy_view_topBanner"
+			position = { x= 1 y = 116 }
+			Orientation = "UPPER_LEFT"
+
+		}
+		
+		guiButtonType = {
+			name = "close_button"
+			position = { x = 514 y = -1 }
+			quadTextureSprite ="GFX_closebutton2"	
+			shortcut = "ESCAPE"
+			Orientation = "UPPER_LEFT"
+			clicksound = close_window
+		}		
+
+		instantTextBoxType = {
+			name = "window_title"
+			position = { x = 15 y =78 }
+			textureFile = ""
+			font = "vic_29s"
+			borderSize = {x = 4 y = 4}	
+			text = "HEADER_ECONOMY"	
+			maxWidth = 512
+			maxHeight = 32
+			format = centre
+		}
+		
+		
+		######################################################
+		### INCOME
+		######################################################		
+		
+		instantTextBoxType = {
+			name = "incomes"
+			position = { x = 83 y =119 }
+			textureFile = ""
+			font = "vic_22"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_INCOMES"	
+			maxWidth = 128
+			maxHeight = 16
+			format = centre
+		}
+		
+		listboxType = {
+			name = "incomes_listbox"
+			backGround = ""
+			position = { x=40 y=145 }
+			size = { x=180 y=300 }
+			Orientation = "UPPER_LEFT"
+			horizontal = 0
+			spacing = 1.5
+			scrollbartype = "standardlistbox_slider"
+			borderSize = {x = 0 y = 0}
+		}		
+
+		iconType = {
+			name ="incomes_total_icon"
+			spriteType = "GFX_icon_gold_font_medium"
+			position = { x= 243 y = 372 }
+			Orientation = "UPPER_LEFT"
+		}
+		
+		instantTextBoxType = {
+			name = "incomes_total_text"
+			position = { x = 38 y =373 }
+			textureFile = ""
+			font = "vic_22"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_INCOMES_TOTAL"	
+			maxWidth = 140
+			maxHeight = 16
+			format = right
+		}
+		
+		instantTextBoxType = {
+			name = "incomes_total"
+			position = { x = 143 y =373 }
+			textureFile = ""
+			font = "vic_22"
+			borderSize = {x = 4 y = 4}	
+			text = "TOTAL +1234"	
+			maxWidth = 100
+			maxHeight = 16
+			format = right
+		}		
+		
+		######################################################
+		### EXPENSES
+		######################################################
+		
+		instantTextBoxType = {
+			name = "expenses"
+			position = { x = 328 y =119 }
+			textureFile = ""
+			font = "vic_22"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_EXPENSES"	
+			maxWidth = 128
+			maxHeight = 16
+			format = centre
+		}		
+		
+		listboxType = {
+			name = "expenses_listbox"
+			backGround = ""
+			position = { x=287 y=145 }
+			size = { x=280 y=300 }
+			Orientation = "UPPER_LEFT"
+			horizontal = 0
+			spacing = 1.0
+			scrollbartype = "standardlistbox_slider"
+			borderSize = {x = 0 y = 0}
+		}		
+
+		iconType = {
+			name ="expenses_total_icon"
+			spriteType = "GFX_icon_gold_font_medium"
+			position = { x= 487 y = 397 }
+			Orientation = "UPPER_LEFT"
+		}
+		
+		instantTextBoxType = {
+			name = "expences_total_text"
+			position = { x = 283 y =398 }
+			textureFile = ""
+			font = "vic_22"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_EXPENSES_TOTAL"	
+			maxWidth = 140
+			maxHeight = 16
+			format = right
+		}
+		
+		instantTextBoxType = {
+			name = "expenses_total"
+			position = { x = 388 y =398 }
+			textureFile = ""
+			font = "vic_22"
+			borderSize = {x = 4 y = 4}	
+			text = "TOTAL -42"	
+			maxWidth = 100
+			maxHeight = 16
+			format = right
+		}	
+
+		iconType = {
+			name ="balance_icon"
+			spriteType = "GFX_icon_gold"
+			position = { x= 487 y = 448 }
+			Orientation = "UPPER_LEFT"
+		}
+		
+		instantTextBoxType = {
+			name = "balance_title"
+			position = { x = 290 y =445 }
+			textureFile = ""
+			font = "vic_29"
+			borderSize = {x = 4 y = 4}	
+			text = "BALANCE"	
+			maxWidth = 92
+			maxHeight = 32
+			format = left
+			
+		}
+		
+		instantTextBoxType = {
+			name = "balance"
+			position = { x = 380 y =441 }
+			textureFile = ""
+			font = "vic_36"
+			borderSize = {x = 4 y = 4}	
+			text = "Balance: -234"	
+			maxWidth = 104
+			maxHeight = 32
+			format = right
+			fixedsize = yes
+		}			
+
+		######################################################
+		###   INFO
+		######################################################
+		
+		
+		iconType = {
+			name ="inflation_linechart_bg"
+			spriteType = "GFX_ledger_econonomy_view_linegraph_bg"
+			position = { x= 46 y = 411 }
+			Orientation = "UPPER_LEFT"
+			scale = 1.0
+			hint_tag = "hint_inflation"
+		}		
+		
+		iconType = {
+			name = "inflation_linechart"
+			spriteType = "GFX_economy_inflation_linechart"
+			position = { x = 47 y = 411 }
+		}	
+
+		iconType = {
+			name ="inflation_linechart_frame"
+			spriteType = "GFX_economy_linechart_frame"
+			position = { x= 40 y = 405 }
+			Orientation = "UPPER_LEFT"
+		}	
+
+		iconType =
+		{
+			name ="inflation_dev_icon"
+			spriteType = "GFX_inflation_arrows_strip"
+			position = { x= 214 y = 398 }
+			Orientation = "UPPER_LEFT"
+			frame = 5
+			hint_tag = "hint_inflation"
+		}
+
+		instantTextBoxType = {
+			name = "inflation_info"
+			position = { x = 190 y = 431 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "2,2%"	
+			maxWidth = 77
+			maxHeight = 16
+			format = centre
+		}
+		
+		iconType = {
+			name ="war_exhaustion_icon"
+			spriteType = "GFX_icon_war_exhaustion"
+			position = { x= 48 y = 457 }
+			Orientation = "UPPER_LEFT"
+			hint_tag = "hint_warexhaustion"
+		}
+		
+		instantTextBoxType = {
+			name = "war_exhaustion"
+			position = { x = 80 y = 460 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "War Exhaustion: 12%"	
+			maxWidth = 64
+			maxHeight = 32
+			format = centre
+		}
+		
+		iconType = {
+			name ="development_icon"
+			spriteType = "GFX_development_icon"
+			position = { x= 162 y = 457 }
+			Orientation = "UPPER_LEFT"
+		}
+		
+		instantTextBoxType = {
+			name = "development_base"
+			position = { x = 194 y = 460 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "Tax Base: 124"	
+			maxWidth = 66
+			maxHeight = 32
+			format = center
+		}
+		
+
+		######################################################
+		###   Buttons
+		######################################################
+
+#GFX_take_loan_button
+		guiButtonType =
+		{
+			name ="debase_currency"
+			quadTextureSprite= "GFX_debase_currency"
+			position = { x= 486 y = 396 }
+			Orientation = "LOWER_LEFT"
+#			buttonText = "CV_DEBASE_CURRENCY"
+			buttonFont = "vic_18"
+		}
+		
+		guiButtonType =
+		{
+			name ="take_loan"
+			quadTextureSprite= "GFX_take_loan_button"
+			position = { x= 280 y = 396 }
+			Orientation = "LOWER_LEFT"
+			buttonFont = "vic_18"
+			hint_tag = "hint_loans"
+		}
+		
+		instantTextBoxType = {
+			name = "take_loan_sum"
+			position = { x = 282 y = 508 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "TAKE_LOAN_SUM"	
+			maxWidth = 100
+			maxHeight = 32
+			format = right
+			alwaystransparent = yes
+		}		
+		
+		guiButtonType =
+		{
+			name ="repay_loan"
+			quadTextureSprite= "GFX_repay_loan"
+			position = { x= 394 y = 396 }
+			Orientation = "LOWER_LEFT"
+#			buttonText = "CV_REPAY_LOAN"
+			buttonFont = "vic_18"		
+			hint_tag = "hint_loans"	
+		}
+		
+		guiButtonType =
+		{
+			name ="repay_all_loans"
+			quadTextureSprite= "GFX_repay_all_loans"
+			position = { x= 440 y = 396 }
+			Orientation = "LOWER_LEFT"
+#			buttonText = "CV_REPAY_X_LOANS"
+			buttonFont = "vic_18"		
+			hint_tag = "hint_loans"	
+		}
+		
+		guiButtonType =
+		{
+			name ="raise_wartaxes"
+			quadTextureSprite= "GFX_raise_war_tax"
+			position = { x= 43 y = 396 }
+			Orientation = "LOWER_LEFT"
+			buttonFont = "vic_18"
+			clicksound = war_taxes
+			hint_tag = "hint_wartaxes"
+		}
+		
+		guiButtonType =
+		{
+			name ="combat_inflation"
+			quadTextureSprite= "GFX_reduce_inflation"
+			position = { x= 89 y = 396 }
+			Orientation = "LOWER_LEFT"
+			buttonFont = "vic_18"
+			hint_tag = "hint_inflation"	
+		}		
+		
+		
+		guiButtonType =
+		{
+			name ="go_bankrupt"
+			quadTextureSprite = "GFX_declare_bankruptcy"
+			position = { x= 135 y = 396 }
+			Orientation = "LOWER_LEFT"
+ 			buttonFont = "vic_18"		
+		}
+		
+		################################################################################################
+		### --- Repay loan window
+		
+		windowType = {
+			name = "countryeconomyview_repayloan"
+			backGround =""
+			position = { x=0 y=0 }	
+			size = { x=1024 y=100 }
+			moveable = 0
+			dontRender = ""
+			horizontalBorder = ""	
+			
+			iconType =
+			{
+				name ="domesticpanel_overlay"
+				spriteType = "GFX_court_view_select_advisor_bg"
+				position = { x= -7 y = -10 }
+				Orientation = "UPPER_LEFT"
+			}				
+			
+			instantTextBoxType = {
+				name = "title"
+				position = { x = 65 y =137 }
+				format = centre
+				font = "vic_22"
+				maxWidth = 420
+				maxHeight = 32
+				Orientation = "UPPER_LEFT"
+				text = "CV_REPAY_LOAN_TITLE"				
+				
+			}
+
+			listboxType = {
+				name = "loans_listbox"
+				position = { x=65 y =185}
+				backGround=""
+				size = { x=445 y =285}
+				Orientation = "UPPER_LEFT"
+				horizontal = 0
+				spacing = 2
+				scrollbartype = "standardlistbox_slider"
+				borderSize = {x = 0 y = 0}
+			}			
+			
+			guiButtonType = {
+				name = "back_button"
+				position = {  x=240 y =531}
+				quadTextureSprite ="GFX_standard_button_71"	
+				tooltip = ""
+				tooltipText =""
+				delayedTooltipText = ""
+				buttonText = "BACK"
+				buttonFont = "vic_18"
+			}			
+		}		
+	
+# GCD_INSERT_BEGIN: economy-view entry and city development bureau
+# A scripted button and a fullscreen anchor live inside countryeconomyview.
+guiButtonType = {
+    name = "gcd_gui_open"
+    position = { x = 552 y = 66 }
+    quadTextureSprite = "GFX_button_straight_87_32"
+    buttonText = ""
+    scripted = yes
+    clicksound = click
+}
+# Keep the original entry button and its caption at the upper right.
+instantTextBoxType = {
+    name = "gcd_entry_caption"
+    position = { x = 552 y = 73 }
+    maxWidth = 87
+    maxHeight = 22
+    text = "gcd_entry_button_label"
+    font = "vic_18"
+    format = center
+    alwaystransparent = yes
+    scripted = no
+}
+windowType = {
+    name = "gcd_city_anchor"
+    backGround = ""
+    position = { x = 0 y = -140 }
+    size = { x = 1024 y = 768 }
+    fullScreen = yes
+    moveable = 0
+    scripted = yes
+    windowType = {
+    name = "gcd_city_window"
+    backGround = ""
+    position = { x = -730 y = -406 }
+    size = { x = 1460 y = 812 }
+    Orientation = "CENTER"
+    moveable = 0
+    scripted = yes
+    iconType = { name = "gcd_frame_art" spriteType = "GFX_gcd_frame" position = { x = 0 y = 0 } alwaystransparent = yes }
+    iconType = { name = "gcd_map_art" spriteType = "GFX_gcd_map" position = { x = 22 y = 55 } alwaystransparent = yes }
+
+
+instantTextBoxType = {
+    name = "gcd_header"
+    position = { x = 420 y = 14 }
+    maxWidth = 620
+    maxHeight = 30
+    text = "gcd_header"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = no
+}
+
+guiButtonType = {
+        name = "gcd_close"
+        position = { x = 1416 y = 15 }
+        quadTextureSprite = "GFX_gcd_close"
+        scripted = yes
+    }
+
+guiButtonType = {
+            name = "gcd_kingsport_button"
+            position = { x = 355 y = 178 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_kingsport_locked"
+            position = { x = 355 y = 178 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_kingsport_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_kingsport_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_kingsport_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_kingsport_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_kingsport_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_kingsport_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_kingsport_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_kingsport_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_kingsport_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_kingsport_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_kingsport_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_kingsport_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_kingsport_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_kelmaldor_button"
+            position = { x = 392 y = 320 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_kelmaldor_locked"
+            position = { x = 392 y = 320 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_kelmaldor_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_kelmaldor_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_kelmaldor_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_kelmaldor_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_kelmaldor_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_kelmaldor_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_kelmaldor_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_kelmaldor_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_kelmaldor_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_kelmaldor_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_kelmaldor_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_kelmaldor_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_kelmaldor_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_bevik_button"
+            position = { x = 501 y = 347 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_bevik_locked"
+            position = { x = 501 y = 347 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_bevik_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_bevik_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_bevik_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_bevik_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_bevik_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_bevik_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_bevik_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_bevik_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_bevik_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_bevik_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_bevik_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_bevik_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_bevik_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_everfrost_button"
+            position = { x = 781 y = 363 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_everfrost_locked"
+            position = { x = 781 y = 363 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_everfrost_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_everfrost_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_everfrost_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_everfrost_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_everfrost_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_everfrost_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_everfrost_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_everfrost_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_everfrost_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_everfrost_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_everfrost_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_everfrost_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_everfrost_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_bruntei_button"
+            position = { x = 224 y = 463 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_bruntei_locked"
+            position = { x = 224 y = 463 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_bruntei_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_bruntei_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_bruntei_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_bruntei_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_bruntei_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_bruntei_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_bruntei_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_bruntei_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_bruntei_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_bruntei_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_bruntei_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_bruntei_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_bruntei_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_gaweton_button"
+            position = { x = 388 y = 483 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_gaweton_locked"
+            position = { x = 388 y = 483 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_gaweton_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_gaweton_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_gaweton_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_gaweton_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_gaweton_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_gaweton_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_gaweton_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_gaweton_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_gaweton_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_gaweton_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_gaweton_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_gaweton_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_gaweton_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_alenard_button"
+            position = { x = 472 y = 449 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_alenard_locked"
+            position = { x = 472 y = 449 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_alenard_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_alenard_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_alenard_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_alenard_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_alenard_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_alenard_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_alenard_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_alenard_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_alenard_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_alenard_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_alenard_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_alenard_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_alenard_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_marshfort_button"
+            position = { x = 616 y = 502 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_marshfort_locked"
+            position = { x = 616 y = 502 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_marshfort_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_marshfort_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_marshfort_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_marshfort_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_marshfort_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_marshfort_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_marshfort_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_marshfort_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_marshfort_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_marshfort_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_marshfort_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_marshfort_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_marshfort_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_eaglecrest_button"
+            position = { x = 268 y = 593 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_eaglecrest_locked"
+            position = { x = 268 y = 593 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_eaglecrest_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_eaglecrest_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_eaglecrest_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_eaglecrest_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_eaglecrest_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_eaglecrest_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_eaglecrest_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_eaglecrest_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_eaglecrest_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_eaglecrest_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_eaglecrest_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_eaglecrest_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_eaglecrest_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_vertesk_button"
+            position = { x = 360 y = 593 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_vertesk_locked"
+            position = { x = 360 y = 593 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_vertesk_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_vertesk_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_vertesk_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_vertesk_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_vertesk_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_vertesk_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_vertesk_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_vertesk_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_vertesk_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_vertesk_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_vertesk_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_vertesk_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_vertesk_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_alenas_button"
+            position = { x = 358 y = 542 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_alenas_locked"
+            position = { x = 358 y = 542 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_alenas_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_alenas_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_alenas_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_alenas_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_alenas_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_alenas_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_alenas_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_alenas_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_alenas_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_alenas_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_alenas_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_alenas_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_alenas_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+guiButtonType = {
+            name = "gcd_newfrontier_button"
+            position = { x = 508 y = 606 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+guiButtonType = {
+            name = "gcd_newfrontier_locked"
+            position = { x = 508 y = 606 }
+            quadTextureSprite = "GFX_gcd_diamond"
+            scripted = yes
+        }
+
+instantTextBoxType = {
+    name = "gcd_newfrontier_title"
+    position = { x = 970 y = 86 }
+    maxWidth = 430
+    maxHeight = 38
+    text = "gcd_newfrontier_title"
+    font = "vic_22"
+    borderSize = { x = 0 y = 0 }
+    format = center
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_newfrontier_intro"
+    position = { x = 972 y = 185 }
+    maxWidth = 427
+    maxHeight = 152
+    text = "gcd_newfrontier_intro"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+instantTextBoxType = {
+    name = "gcd_newfrontier_level_1_text"
+    position = { x = 1004 y = 426 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_newfrontier_level_1_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_newfrontier_star_1"
+                position = { x = 967 y = 439 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_newfrontier_level_2_text"
+    position = { x = 1004 y = 556 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_newfrontier_level_2_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_newfrontier_star_2"
+                position = { x = 967 y = 569 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+instantTextBoxType = {
+    name = "gcd_newfrontier_level_3_text"
+    position = { x = 1004 y = 686 }
+    maxWidth = 392
+    maxHeight = 74
+    text = "gcd_newfrontier_level_3_text"
+    font = "vic_18"
+    borderSize = { x = 0 y = 0 }
+    format = left
+    alwaystransparent = yes
+    scripted = yes
+}
+
+iconType = {
+                name = "gcd_newfrontier_star_3"
+                position = { x = 967 y = 699 }
+                spriteType = "GFX_gcd_star"
+                alwaystransparent = yes
+                scripted = yes
+            }
+
+}
+}
+# GCD_INSERT_END
+}
+
+	################################################################################################
+	### --- Economy list item
+	
+	windowType = {
+		name = "countryeconomyview_listitem"
+		backGround =""
+		position = { x=0 y=0 }	
+		size = { x=200 y=17 }
+		moveable = 0
+		dontRender = ""
+		horizontalBorder = ""		
+		
+		instantTextBoxType = {
+			name = "name"
+			position = { x = -2 y = -1 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "EXPENSE_TRIBUTE"	
+			maxWidth = 200
+			maxHeight = 16
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "value2"
+			position = { x = 94 y = -1 }
+			textureFile = ""
+			font = "vic_18_grey"
+			borderSize = {x = 4 y = 4}	
+			text = ""
+			maxWidth = 100
+			maxHeight = 16
+			format = centre
+		}		
+		
+		instantTextBoxType = {
+			name = "value"
+			position = { x = 170 y = -1 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "0 (0%)"	
+			maxWidth = 54
+			maxHeight = 16
+			format = right
+		}
+	}	
+	
+	windowType = {
+		name = "countryeconomyview_listitem_slider"
+		backGround =""
+		position = { x=0 y=0 }	
+		size = { x=200 y=16 }
+		moveable = 0
+		dontRender = ""
+		horizontalBorder = ""	
+
+		scrollbarType = {
+			name = "slider"	
+			slider = "SliderButton"
+			track= "TrackButton"
+			leftbutton = "upButton"
+			rightbutton = "downButton"
+			size = {x =220 y =16 }
+			position = {x= 3 y = 3}
+			priority = 100			
+			borderSize = {x =16 y = 16}	
+			maxValue = 1
+			minValue = 0
+			stepSize =0.01
+			startValue = 1
+			horizontal = 1
+
+			guiButtonType = {
+				name = "SliderButton"	
+				quadTextureSprite = "GFX_scroll_drager_blue"
+				tooltip = ""
+				tooltipText =""	
+				delayedTooltipText = ""
+				position = { x=0 y =0}
+			}
+
+			guiButtonType = {
+				name = "TrackButton"
+				quadTextureSprite = "yearslider_background"
+				position = { x=0 y =0}	
+				tooltip = ""
+				tooltipText =""
+				delayedTooltipText = ""	
+
+			}	
+
+			guiButtonType = {
+				parent = "SliderButton"
+				name = "upButton"
+				quadTextureSprite = "GFX_scroll_left"
+				position = { x=0 y =0}	
+			}
+			
+			guiButtonType = {
+				parent = "SliderButton"
+				name = "downButton"
+				quadTextureSprite = "GFX_scroll_right"
+				position = { x=0 y =120}	
+			}
+		}		
+	}		
+	
+	################################################################################################
+	### --- Loan repay list item
+	
+	windowType = {
+		name = "countryeconomyview_loanrepayitem"
+		backGround =""
+		position = { x=0 y=0 }	
+		size = { x=445 y=70 }
+		moveable = 0
+		dontRender = ""
+		horizontalBorder = ""
+
+		iconType =
+		{
+			name ="loan_background"
+			spriteType = "GFX_economy_repayLoan_bg"
+			position = { x= -16 y = -5 }
+			Orientation = "UPPER_LEFT"
+		}		
+
+		instantTextBoxType = {
+			name = "loan_lender"
+			position = { x = 2 y = 2 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_ECONOMY_LOAN_LENDER"	
+			maxWidth = 300
+			maxHeight = 32
+			format = left
+		}
+		
+		instantTextBoxType = {
+			name = "loan_amount_interest"
+			position = { x = 2 y = 19 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_ECONOMY_LOAN_AMOUNT_INTEREST"	
+			maxWidth = 300
+			maxHeight = 32
+			format = left
+		}
+
+		instantTextBoxType = {
+			name = "loan_expire"
+			position = { x = 2 y = 36 }
+			textureFile = ""
+			font = "vic_18"
+			borderSize = {x = 4 y = 4}	
+			text = "CV_ECONOMY_LOAN_EXPIRE"	
+			maxWidth = 300
+			maxHeight = 32
+			format = left
+		}		
+
+		guiButtonType = {
+			name = "pay_button"
+			position = { x=337 y = 15}
+			quadTextureSprite ="GFX_standard_button_71"	
+			tooltip = ""
+			tooltipText =""
+			delayedTooltipText = ""
+			buttonText = "CV_ECONOMY_LOAN_REPAY"
+			buttonFont = "vic_18"
+		}		
+	}	
+}

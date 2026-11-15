@@ -1,0 +1,353 @@
+# 每次选择城市前清掉其他选中态；城市等级和解锁状态保持不变。
+
+gcd_clear_city_selection = {
+
+    clr_country_flag = gcd_kingsport_selected
+
+    clr_country_flag = gcd_kelmaldor_selected
+
+    clr_country_flag = gcd_bevik_selected
+
+    clr_country_flag = gcd_everfrost_selected
+
+    clr_country_flag = gcd_bruntei_selected
+
+    clr_country_flag = gcd_gaweton_selected
+
+    clr_country_flag = gcd_alenard_selected
+
+    clr_country_flag = gcd_marshfort_selected
+
+    clr_country_flag = gcd_eaglecrest_selected
+
+    clr_country_flag = gcd_vertesk_selected
+
+    clr_country_flag = gcd_alenas_selected
+
+    clr_country_flag = gcd_newfrontier_selected
+
+}
+
+# 君王港升至1级：在后续任务、事件或决议中调用 gcd_kingsport_set_level_1 = yes。
+gcd_kingsport_set_level_1 = {
+    set_country_flag = gcd_kingsport_unlocked
+    clr_country_flag = gcd_kingsport_level_1
+    clr_country_flag = gcd_kingsport_level_2
+    clr_country_flag = gcd_kingsport_level_3
+    set_country_flag = gcd_kingsport_level_1
+}
+
+# 君王港升至2级：在后续任务、事件或决议中调用 gcd_kingsport_set_level_2 = yes。
+gcd_kingsport_set_level_2 = {
+    set_country_flag = gcd_kingsport_unlocked
+    clr_country_flag = gcd_kingsport_level_1
+    clr_country_flag = gcd_kingsport_level_2
+    clr_country_flag = gcd_kingsport_level_3
+    set_country_flag = gcd_kingsport_level_2
+}
+
+# 君王港升至3级：在后续任务、事件或决议中调用 gcd_kingsport_set_level_3 = yes。
+gcd_kingsport_set_level_3 = {
+    set_country_flag = gcd_kingsport_unlocked
+    clr_country_flag = gcd_kingsport_level_1
+    clr_country_flag = gcd_kingsport_level_2
+    clr_country_flag = gcd_kingsport_level_3
+    set_country_flag = gcd_kingsport_level_3
+}
+
+# 阿申海斯升至1级：在后续任务、事件或决议中调用 gcd_kelmaldor_set_level_1 = yes。
+gcd_kelmaldor_set_level_1 = {
+    set_country_flag = gcd_kelmaldor_unlocked
+    clr_country_flag = gcd_kelmaldor_level_1
+    clr_country_flag = gcd_kelmaldor_level_2
+    clr_country_flag = gcd_kelmaldor_level_3
+    set_country_flag = gcd_kelmaldor_level_1
+}
+
+# 阿申海斯升至2级：在后续任务、事件或决议中调用 gcd_kelmaldor_set_level_2 = yes。
+gcd_kelmaldor_set_level_2 = {
+    set_country_flag = gcd_kelmaldor_unlocked
+    clr_country_flag = gcd_kelmaldor_level_1
+    clr_country_flag = gcd_kelmaldor_level_2
+    clr_country_flag = gcd_kelmaldor_level_3
+    set_country_flag = gcd_kelmaldor_level_2
+}
+
+# 阿申海斯升至3级：在后续任务、事件或决议中调用 gcd_kelmaldor_set_level_3 = yes。
+gcd_kelmaldor_set_level_3 = {
+    set_country_flag = gcd_kelmaldor_unlocked
+    clr_country_flag = gcd_kelmaldor_level_1
+    clr_country_flag = gcd_kelmaldor_level_2
+    clr_country_flag = gcd_kelmaldor_level_3
+    set_country_flag = gcd_kelmaldor_level_3
+}
+
+# 贝维克升至1级：在后续任务、事件或决议中调用 gcd_bevik_set_level_1 = yes。
+gcd_bevik_set_level_1 = {
+    set_country_flag = gcd_bevik_unlocked
+    clr_country_flag = gcd_bevik_level_1
+    clr_country_flag = gcd_bevik_level_2
+    clr_country_flag = gcd_bevik_level_3
+    set_country_flag = gcd_bevik_level_1
+}
+
+# 贝维克升至2级：在后续任务、事件或决议中调用 gcd_bevik_set_level_2 = yes。
+gcd_bevik_set_level_2 = {
+    set_country_flag = gcd_bevik_unlocked
+    clr_country_flag = gcd_bevik_level_1
+    clr_country_flag = gcd_bevik_level_2
+    clr_country_flag = gcd_bevik_level_3
+    set_country_flag = gcd_bevik_level_2
+}
+
+# 贝维克升至3级：在后续任务、事件或决议中调用 gcd_bevik_set_level_3 = yes。
+gcd_bevik_set_level_3 = {
+    set_country_flag = gcd_bevik_unlocked
+    clr_country_flag = gcd_bevik_level_1
+    clr_country_flag = gcd_bevik_level_2
+    clr_country_flag = gcd_bevik_level_3
+    set_country_flag = gcd_bevik_level_3
+}
+
+# 永冻堡升至1级：在后续任务、事件或决议中调用 gcd_everfrost_set_level_1 = yes。
+gcd_everfrost_set_level_1 = {
+    set_country_flag = gcd_everfrost_unlocked
+    clr_country_flag = gcd_everfrost_level_1
+    clr_country_flag = gcd_everfrost_level_2
+    clr_country_flag = gcd_everfrost_level_3
+    set_country_flag = gcd_everfrost_level_1
+}
+
+# 永冻堡升至2级：在后续任务、事件或决议中调用 gcd_everfrost_set_level_2 = yes。
+gcd_everfrost_set_level_2 = {
+    set_country_flag = gcd_everfrost_unlocked
+    clr_country_flag = gcd_everfrost_level_1
+    clr_country_flag = gcd_everfrost_level_2
+    clr_country_flag = gcd_everfrost_level_3
+    set_country_flag = gcd_everfrost_level_2
+}
+
+# 永冻堡升至3级：在后续任务、事件或决议中调用 gcd_everfrost_set_level_3 = yes。
+gcd_everfrost_set_level_3 = {
+    set_country_flag = gcd_everfrost_unlocked
+    clr_country_flag = gcd_everfrost_level_1
+    clr_country_flag = gcd_everfrost_level_2
+    clr_country_flag = gcd_everfrost_level_3
+    set_country_flag = gcd_everfrost_level_3
+}
+
+# 布朗泰角升至1级：在后续任务、事件或决议中调用 gcd_bruntei_set_level_1 = yes。
+gcd_bruntei_set_level_1 = {
+    set_country_flag = gcd_bruntei_unlocked
+    clr_country_flag = gcd_bruntei_level_1
+    clr_country_flag = gcd_bruntei_level_2
+    clr_country_flag = gcd_bruntei_level_3
+    set_country_flag = gcd_bruntei_level_1
+}
+
+# 布朗泰角升至2级：在后续任务、事件或决议中调用 gcd_bruntei_set_level_2 = yes。
+gcd_bruntei_set_level_2 = {
+    set_country_flag = gcd_bruntei_unlocked
+    clr_country_flag = gcd_bruntei_level_1
+    clr_country_flag = gcd_bruntei_level_2
+    clr_country_flag = gcd_bruntei_level_3
+    set_country_flag = gcd_bruntei_level_2
+}
+
+# 布朗泰角升至3级：在后续任务、事件或决议中调用 gcd_bruntei_set_level_3 = yes。
+gcd_bruntei_set_level_3 = {
+    set_country_flag = gcd_bruntei_unlocked
+    clr_country_flag = gcd_bruntei_level_1
+    clr_country_flag = gcd_bruntei_level_2
+    clr_country_flag = gcd_bruntei_level_3
+    set_country_flag = gcd_bruntei_level_3
+}
+
+# 加韦顿升至1级：在后续任务、事件或决议中调用 gcd_gaweton_set_level_1 = yes。
+gcd_gaweton_set_level_1 = {
+    set_country_flag = gcd_gaweton_unlocked
+    clr_country_flag = gcd_gaweton_level_1
+    clr_country_flag = gcd_gaweton_level_2
+    clr_country_flag = gcd_gaweton_level_3
+    set_country_flag = gcd_gaweton_level_1
+}
+
+# 加韦顿升至2级：在后续任务、事件或决议中调用 gcd_gaweton_set_level_2 = yes。
+gcd_gaweton_set_level_2 = {
+    set_country_flag = gcd_gaweton_unlocked
+    clr_country_flag = gcd_gaweton_level_1
+    clr_country_flag = gcd_gaweton_level_2
+    clr_country_flag = gcd_gaweton_level_3
+    set_country_flag = gcd_gaweton_level_2
+}
+
+# 加韦顿升至3级：在后续任务、事件或决议中调用 gcd_gaweton_set_level_3 = yes。
+gcd_gaweton_set_level_3 = {
+    set_country_flag = gcd_gaweton_unlocked
+    clr_country_flag = gcd_gaweton_level_1
+    clr_country_flag = gcd_gaweton_level_2
+    clr_country_flag = gcd_gaweton_level_3
+    set_country_flag = gcd_gaweton_level_3
+}
+
+# 艾伦沃德升至1级：在后续任务、事件或决议中调用 gcd_alenard_set_level_1 = yes。
+gcd_alenard_set_level_1 = {
+    set_country_flag = gcd_alenard_unlocked
+    clr_country_flag = gcd_alenard_level_1
+    clr_country_flag = gcd_alenard_level_2
+    clr_country_flag = gcd_alenard_level_3
+    set_country_flag = gcd_alenard_level_1
+}
+
+# 艾伦沃德升至2级：在后续任务、事件或决议中调用 gcd_alenard_set_level_2 = yes。
+gcd_alenard_set_level_2 = {
+    set_country_flag = gcd_alenard_unlocked
+    clr_country_flag = gcd_alenard_level_1
+    clr_country_flag = gcd_alenard_level_2
+    clr_country_flag = gcd_alenard_level_3
+    set_country_flag = gcd_alenard_level_2
+}
+
+# 艾伦沃德升至3级：在后续任务、事件或决议中调用 gcd_alenard_set_level_3 = yes。
+gcd_alenard_set_level_3 = {
+    set_country_flag = gcd_alenard_unlocked
+    clr_country_flag = gcd_alenard_level_1
+    clr_country_flag = gcd_alenard_level_2
+    clr_country_flag = gcd_alenard_level_3
+    set_country_flag = gcd_alenard_level_3
+}
+
+# 沼泽堡升至1级：在后续任务、事件或决议中调用 gcd_marshfort_set_level_1 = yes。
+gcd_marshfort_set_level_1 = {
+    set_country_flag = gcd_marshfort_unlocked
+    clr_country_flag = gcd_marshfort_level_1
+    clr_country_flag = gcd_marshfort_level_2
+    clr_country_flag = gcd_marshfort_level_3
+    set_country_flag = gcd_marshfort_level_1
+}
+
+# 沼泽堡升至2级：在后续任务、事件或决议中调用 gcd_marshfort_set_level_2 = yes。
+gcd_marshfort_set_level_2 = {
+    set_country_flag = gcd_marshfort_unlocked
+    clr_country_flag = gcd_marshfort_level_1
+    clr_country_flag = gcd_marshfort_level_2
+    clr_country_flag = gcd_marshfort_level_3
+    set_country_flag = gcd_marshfort_level_2
+}
+
+# 沼泽堡升至3级：在后续任务、事件或决议中调用 gcd_marshfort_set_level_3 = yes。
+gcd_marshfort_set_level_3 = {
+    set_country_flag = gcd_marshfort_unlocked
+    clr_country_flag = gcd_marshfort_level_1
+    clr_country_flag = gcd_marshfort_level_2
+    clr_country_flag = gcd_marshfort_level_3
+    set_country_flag = gcd_marshfort_level_3
+}
+
+# 鹰冠升至1级：在后续任务、事件或决议中调用 gcd_eaglecrest_set_level_1 = yes。
+gcd_eaglecrest_set_level_1 = {
+    set_country_flag = gcd_eaglecrest_unlocked
+    clr_country_flag = gcd_eaglecrest_level_1
+    clr_country_flag = gcd_eaglecrest_level_2
+    clr_country_flag = gcd_eaglecrest_level_3
+    set_country_flag = gcd_eaglecrest_level_1
+}
+
+# 鹰冠升至2级：在后续任务、事件或决议中调用 gcd_eaglecrest_set_level_2 = yes。
+gcd_eaglecrest_set_level_2 = {
+    set_country_flag = gcd_eaglecrest_unlocked
+    clr_country_flag = gcd_eaglecrest_level_1
+    clr_country_flag = gcd_eaglecrest_level_2
+    clr_country_flag = gcd_eaglecrest_level_3
+    set_country_flag = gcd_eaglecrest_level_2
+}
+
+# 鹰冠升至3级：在后续任务、事件或决议中调用 gcd_eaglecrest_set_level_3 = yes。
+gcd_eaglecrest_set_level_3 = {
+    set_country_flag = gcd_eaglecrest_unlocked
+    clr_country_flag = gcd_eaglecrest_level_1
+    clr_country_flag = gcd_eaglecrest_level_2
+    clr_country_flag = gcd_eaglecrest_level_3
+    set_country_flag = gcd_eaglecrest_level_3
+}
+
+# 维特斯克升至1级：在后续任务、事件或决议中调用 gcd_vertesk_set_level_1 = yes。
+gcd_vertesk_set_level_1 = {
+    set_country_flag = gcd_vertesk_unlocked
+    clr_country_flag = gcd_vertesk_level_1
+    clr_country_flag = gcd_vertesk_level_2
+    clr_country_flag = gcd_vertesk_level_3
+    set_country_flag = gcd_vertesk_level_1
+}
+
+# 维特斯克升至2级：在后续任务、事件或决议中调用 gcd_vertesk_set_level_2 = yes。
+gcd_vertesk_set_level_2 = {
+    set_country_flag = gcd_vertesk_unlocked
+    clr_country_flag = gcd_vertesk_level_1
+    clr_country_flag = gcd_vertesk_level_2
+    clr_country_flag = gcd_vertesk_level_3
+    set_country_flag = gcd_vertesk_level_2
+}
+
+# 维特斯克升至3级：在后续任务、事件或决议中调用 gcd_vertesk_set_level_3 = yes。
+gcd_vertesk_set_level_3 = {
+    set_country_flag = gcd_vertesk_unlocked
+    clr_country_flag = gcd_vertesk_level_1
+    clr_country_flag = gcd_vertesk_level_2
+    clr_country_flag = gcd_vertesk_level_3
+    set_country_flag = gcd_vertesk_level_3
+}
+
+# 艾伦纳斯升至1级：在后续任务、事件或决议中调用 gcd_alenas_set_level_1 = yes。
+gcd_alenas_set_level_1 = {
+    set_country_flag = gcd_alenas_unlocked
+    clr_country_flag = gcd_alenas_level_1
+    clr_country_flag = gcd_alenas_level_2
+    clr_country_flag = gcd_alenas_level_3
+    set_country_flag = gcd_alenas_level_1
+}
+
+# 艾伦纳斯升至2级：在后续任务、事件或决议中调用 gcd_alenas_set_level_2 = yes。
+gcd_alenas_set_level_2 = {
+    set_country_flag = gcd_alenas_unlocked
+    clr_country_flag = gcd_alenas_level_1
+    clr_country_flag = gcd_alenas_level_2
+    clr_country_flag = gcd_alenas_level_3
+    set_country_flag = gcd_alenas_level_2
+}
+
+# 艾伦纳斯升至3级：在后续任务、事件或决议中调用 gcd_alenas_set_level_3 = yes。
+gcd_alenas_set_level_3 = {
+    set_country_flag = gcd_alenas_unlocked
+    clr_country_flag = gcd_alenas_level_1
+    clr_country_flag = gcd_alenas_level_2
+    clr_country_flag = gcd_alenas_level_3
+    set_country_flag = gcd_alenas_level_3
+}
+
+# 新边区升至1级：在后续任务、事件或决议中调用 gcd_newfrontier_set_level_1 = yes。
+gcd_newfrontier_set_level_1 = {
+    set_country_flag = gcd_newfrontier_unlocked
+    clr_country_flag = gcd_newfrontier_level_1
+    clr_country_flag = gcd_newfrontier_level_2
+    clr_country_flag = gcd_newfrontier_level_3
+    set_country_flag = gcd_newfrontier_level_1
+}
+
+# 新边区升至2级：在后续任务、事件或决议中调用 gcd_newfrontier_set_level_2 = yes。
+gcd_newfrontier_set_level_2 = {
+    set_country_flag = gcd_newfrontier_unlocked
+    clr_country_flag = gcd_newfrontier_level_1
+    clr_country_flag = gcd_newfrontier_level_2
+    clr_country_flag = gcd_newfrontier_level_3
+    set_country_flag = gcd_newfrontier_level_2
+}
+
+# 新边区升至3级：在后续任务、事件或决议中调用 gcd_newfrontier_set_level_3 = yes。
+gcd_newfrontier_set_level_3 = {
+    set_country_flag = gcd_newfrontier_unlocked
+    clr_country_flag = gcd_newfrontier_level_1
+    clr_country_flag = gcd_newfrontier_level_2
+    clr_country_flag = gcd_newfrontier_level_3
+    set_country_flag = gcd_newfrontier_level_3
+}

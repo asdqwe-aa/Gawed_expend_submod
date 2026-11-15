@@ -1,0 +1,29 @@
+﻿艾伦城市：经济界面入口版
+
+使用：打开“经济”页，点击右上角的蓝色“发展署”按钮。
+加韦德 A13 玩家可点击；首次打开会初始化加韦顿一级。
+再次点击入口，或点击城市窗口右上角的关闭按钮，即可收起。
+切换到其他国家页时窗口随经济页隐藏；返回经济页时保留打开状态。
+不再提供开启或关闭决议。
+
+本包只覆盖 interface/countryeconomyview.gui，不覆盖决议页或顶栏。
+当前 Anbennar 主模组及汉化包没有同名经济 GUI。其他经济界面改造模组仍需合并。
+升级时必须移除本模组旧版 interface/countrydecisionsview.gui 和
+decisions/gcd_city_bureau.txt；直接覆盖解压不会自动删除旧文件。
+
+制作源文件：
+  经济界面_基础文件.txt：当前 EU4 原版经济界面的完整底稿。
+  经济界面_窗口片段.txt：城市入口及窗口，控件名须与 custom_gui 对应。
+  城市发展署_中文原文.yml：中文编辑源，不要直接写入游戏本地化。
+  修订北坎诺地图.svg：地图与名称的矢量源。游戏使用 gcd_map.dds。
+
+重建界面与本地化（Python 3.9 或更高）：
+  python "制作源文件/重新生成整包.py"
+从当前游戏文件重新合并：
+  python "制作源文件/重新生成整包.py" --economy-base "游戏目录/interface/countryeconomyview.gui"
+生成安装包：在上面的命令后增加 --zip "模组目录外/艾伦城市_经济界面版.zip"。
+该脚本使用已经提供的贴图，不依赖旧的原始地图上传文件或 Linux 字体。
+修改地图 SVG 后，另行渲染 PNG 和 DXT5 DDS，保持游戏地图 900×745。
+
+“布朗泰角”的显示名称已同步更新，bruntei 脚本 ID 保留以兼容现有存档。
+城市解锁和等级效果继续由 common/scripted_effects/gcd_city_level_effects.txt 管理。
