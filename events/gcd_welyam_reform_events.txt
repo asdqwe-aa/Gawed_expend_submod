@@ -41,7 +41,8 @@ country_event = {
     option = {
         name = gcd_welyam.10.a
         # 新增：图五奖励放在事件选项中；顾问花费持续到当前君主死亡。
-        add_reform_progress = 25
+        # 修正（日志确认）：add_reform_progress 不是 EU4 有效效果。
+        change_government_reform_progress = 25
         add_treasury = 100
         add_ruler_modifier = { name = gcd_welyam_first_council duration = -1 }
     }
@@ -115,21 +116,37 @@ country_event = {
             has_country_flag = gcd_welyam_civil_war_active
         }
     }
-    # 修正（12月12日栈溢出）：不能在 immediate 中安排自身。
-    # 按 Anbennar diggy_dungeons.2000 的结构，在隐藏自动选项中执行并延迟下一轮。
+    # 修正（内战后再次栈溢出）：彻底退役循环事件，旧存档遗留的 .90 只执行一次兼容接入。
+    # 所有后续每日工作由原生 province_triggered_modifier 翻转完成，不再安排自身。
     option = {
         name = gcd_welyam.90.a
         ai_chance = { factor = 1 }
-        gcd_welyam_daily_reform_effect = yes
-        # 新增：灾难/内战均结束后不再排队下一天，避免永久空转。
+        gcd_welyam_install_daily_pulse_effect = yes
+        gcd_welyam_run_daily_once_effect = yes
+    }
+}
+
+country_event = {
+    id = gcd_welyam.91
+    title = gcd_welyam.91.t
+    desc = gcd_welyam_placeholder_desc
+    picture = NOBLE_ESTATE_eventPicture
+    hidden = yes
+    is_triggered_only = yes
+    # 新增：不在此处重排自身；下一次由灾难时钟满两年后投递。
+    option = {
+        name = gcd_welyam.91.a
+        ai_chance = { factor = 1 }
+        clr_country_flag = gcd_welyam_rebel_event_queued
+        # 防护：即使已在队列中，完成任务二或结束灾难后也不能生成叛军。
         if = {
             limit = {
-                OR = {
-                    has_disaster = gcd_welyam_reform
-                    has_country_flag = gcd_welyam_civil_war_active
-                }
+                tag = A13
+                has_disaster = gcd_welyam_reform
+                NOT = { has_country_flag = gcd_welyam_rebel_spawn_stopped }
+                has_country_flag = gcd_welyam_fixed_rebels_due
             }
-            country_event = { id = gcd_welyam.90 days = 1 }
+            gcd_welyam_try_spawn_fixed_rebels_effect = yes
         }
     }
 }

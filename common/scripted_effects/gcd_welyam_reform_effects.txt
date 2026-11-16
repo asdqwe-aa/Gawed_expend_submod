@@ -1,4 +1,4 @@
-# 新增：只有 A13 的一个每日隐藏事件负责计时，不使用全地图每日国家遍历。
+# 修正：采用 Anbennar 原生省份触发修正的每日翻转，不再安排循环隐藏事件。
 gcd_welyam_begin_reform_effect = {
     set_country_flag = gcd_welyam_opening_seen
     set_country_flag = gcd_welyam_rebel_clock
@@ -12,7 +12,50 @@ gcd_welyam_begin_reform_effect = {
         set_country_flag = gcd_welyam_owns_burgher_loan_lock
         set_country_flag = estate_burghers_indebted_to_burghers_disabled
     }
-    country_event = { id = gcd_welyam.90 days = 1 }
+    gcd_welyam_install_daily_pulse_effect = yes
+}
+
+# 修正（内战后栈溢出）：停止使用会在事件链中重入的 .90 自我调度。
+# 参考本机 feiten_daily_pulse，只在固定省份挂一个无数值、不可见的每日检查。
+gcd_welyam_install_daily_pulse_effect = {
+    if = {
+        limit = { NOT = { has_country_flag = gcd_welyam_daily_pulse_installed } }
+        set_country_flag = gcd_welyam_daily_pulse_installed
+        221 = { add_province_triggered_modifier = gcd_welyam_daily_pulse }
+    }
+}
+
+gcd_welyam_remove_daily_pulse_effect = {
+    # 先关运行标记，防止移除时的 on_deactivation 再次进入检测。
+    clr_country_flag = gcd_welyam_daily_pulse_installed
+    clr_country_flag = gcd_welyam_last_daily_tick
+    221 = {
+        remove_province_triggered_modifier = gcd_welyam_daily_pulse
+        clr_province_flag = gcd_welyam_daily_flip
+    }
+}
+
+gcd_welyam_run_daily_once_effect = {
+    if = {
+        limit = {
+            tag = A13
+            has_country_flag = gcd_welyam_daily_pulse_installed
+            OR = {
+                AND = {
+                    has_disaster = gcd_welyam_reform
+                    NOT = { has_country_flag = gcd_welyam_reform_ended }
+                }
+                has_country_flag = gcd_welyam_civil_war_active
+            }
+            # 兼容旧存档残留的 .90 以及加载回调；同一天最多运行一次。
+            OR = {
+                NOT = { has_country_flag = gcd_welyam_last_daily_tick }
+                had_country_flag = { flag = gcd_welyam_last_daily_tick days = 1 }
+            }
+        }
+        set_country_flag = gcd_welyam_last_daily_tick
+        gcd_welyam_daily_reform_effect = yes
+    }
 }
 
 gcd_welyam_cleanup_reform_effect = {
@@ -23,6 +66,11 @@ gcd_welyam_cleanup_reform_effect = {
     clr_country_flag = gcd_welyam_low_nobles_since
     clr_country_flag = gcd_welyam_rebel_clock
     clr_country_flag = gcd_welyam_fixed_rebels_due
+    clr_country_flag = gcd_welyam_rebel_event_queued
+    if = {
+        limit = { NOT = { has_country_flag = gcd_welyam_civil_war_active } }
+        gcd_welyam_remove_daily_pulse_effect = yes
+    }
     # 提醒：十年中央集权、十五年大围猎、随君主存续的顾问修正各自到期，不在此提前删除。
 }
 
@@ -53,7 +101,8 @@ gcd_welyam_daily_reform_effect = {
             if = {
                 limit = { had_country_flag = { flag = gcd_welyam_low_nobles_since days = 365 } }
                 set_country_flag = gcd_welyam_civil_war_queued
-                country_event = { id = gcd_welyam.100 }
+                # 修正：将界面事件延迟一天，避免在每日回调栈中直接进入内战事件链。
+                country_event = { id = gcd_welyam.100 days = 1 }
             }
         }
         else = {
@@ -65,14 +114,76 @@ gcd_welyam_daily_reform_effect = {
                 NOT = { has_country_flag = gcd_welyam_rebel_spawn_stopped }
                 had_country_flag = { flag = gcd_welyam_rebel_clock days = 730 }
             }
-            # 待实现（用户已确认）：必须固定 12k；不使用随科技/发展度缩放的替代叛军。
-            # 目前仅保留两年时钟和接口，不实际生成叛军。任务二仍可关闭该接口。
+            # 新增：达到两年先挂待生成标记；没有空省时继续等待。
             set_country_flag = gcd_welyam_fixed_rebels_due
+        }
+        if = {
+            limit = {
+                has_country_flag = gcd_welyam_fixed_rebels_due
+                NOT = { has_country_flag = gcd_welyam_rebel_spawn_stopped }
+                NOT = { has_country_flag = gcd_welyam_rebel_event_queued }
+                any_owned_province = { gcd_welyam_safe_rebel_province_trigger = yes }
+            }
+            # 修正（用户补充）：每两年投递一次专用隐藏事件；不在事件中自我调度。
+            set_country_flag = gcd_welyam_rebel_event_queued
+            # 以投递日作为下一轮起点，使两次隐藏事件间隔保持 730 天。
             clr_country_flag = gcd_welyam_rebel_clock
             set_country_flag = gcd_welyam_rebel_clock
+            country_event = { id = gcd_welyam.91 days = 1 }
         }
     }
     gcd_welyam_check_civil_war_outcome_effect = yes
+}
+
+# 新增：只选择己方控制且没有部队的本国省份，不会调整已有叛军或删掉玩家部队。
+# 暂无空省时保留到期标记，之后每日重试；任务二或灾难结束会撤销待生成标记。
+gcd_welyam_try_spawn_fixed_rebels_effect = {
+    random_owned_province = {
+        limit = { gcd_welyam_safe_rebel_province_trigger = yes }
+        gcd_welyam_spawn_fixed_rebels_in_province_effect = yes
+    }
+}
+
+# 新增：省份作用域。size 是倍率，因此先生成贵族叛军，再按 REB 团数校准到恰好 12 团。
+# 初始省份必须没有部队，脚本同步执行期间这里的 REB 全是本次新生成的贵族叛军。
+gcd_welyam_spawn_fixed_rebels_in_province_effect = {
+    set_variable = { gcd_welyam_rebel_seed_steps = 0 }
+    set_variable = { gcd_welyam_rebel_trim_steps = 0 }
+    while = {
+        limit = {
+            NOT = { num_of_units_in_province = { who = REB amount = 12 } }
+            NOT = { check_variable = { gcd_welyam_rebel_seed_steps = 12 } }
+        }
+        spawn_rebels = { type = noble_rebels size = 3 }
+        change_variable = { gcd_welyam_rebel_seed_steps = 1 }
+    }
+    while = {
+        limit = {
+            num_of_units_in_province = { who = REB amount = 13 }
+            NOT = { check_variable = { gcd_welyam_rebel_trim_steps = 512 } }
+        }
+        # 本机 Anbennar 也使用 kill_units / who=REB / amount 来精确处理叛军团。
+        kill_units = { who = REB amount = 1 }
+        change_variable = { gcd_welyam_rebel_trim_steps = 1 }
+    }
+    if = {
+        limit = {
+            num_of_units_in_province = { who = REB amount = 12 }
+            NOT = { num_of_units_in_province = { who = REB amount = 13 } }
+        }
+        owner = {
+            clr_country_flag = gcd_welyam_fixed_rebels_due
+            clr_country_flag = gcd_welyam_fixed_rebels_failed
+            # 时钟由投递隐藏事件的灾难计时器维护，避免事件延迟的一天逐轮累计。
+        }
+    }
+    else = {
+        # 防护：若引擎未能校准成功，回收本次新叛军并保留重试，不留下错误规模。
+        kill_units = { who = REB }
+        owner = { set_country_flag = gcd_welyam_fixed_rebels_failed }
+    }
+    set_variable = { gcd_welyam_rebel_seed_steps = 0 }
+    set_variable = { gcd_welyam_rebel_trim_steps = 0 }
 }
 
 # 新增：只转让加韦德自己的非首都核心领土，不从第三国夺取土地。
@@ -136,7 +247,7 @@ gcd_welyam_start_civil_war_effect = {
     else = {
         # 防护：仅剩首都且无法建立领头国时不制造永远无法结算的假战争。
         clr_country_flag = gcd_welyam_civil_war_happened
-        country_event = { id = gcd_welyam.103 }
+        country_event = { id = gcd_welyam.103 days = 1 }
     }
 }
 
@@ -173,12 +284,12 @@ gcd_welyam_check_civil_war_outcome_effect = {
             }
             # 新增：叛军或无关第三国占领不能触发“大边区一方攻占加韦顿”。
             set_country_flag = gcd_welyam_civil_war_result_queued
-            country_event = { id = gcd_welyam.101 }
+            country_event = { id = gcd_welyam.101 days = 1 }
         }
         else_if = {
             limit = { war_score_against = { who = A50 value = 99 } }
             set_country_flag = gcd_welyam_civil_war_result_queued
-            country_event = { id = gcd_welyam.102 }
+            country_event = { id = gcd_welyam.102 days = 1 }
         }
     }
 }
@@ -194,6 +305,10 @@ gcd_welyam_crown_victory_effect = {
     inherit = A52
     inherit = A51
     inherit = A24
+    if = {
+        limit = { has_country_flag = gcd_welyam_reform_ended }
+        gcd_welyam_remove_daily_pulse_effect = yes
+    }
     # 提醒：王室胜利本身不结束改革灾难，仍须完成“威利亚姆之治”。
 }
 
@@ -240,7 +355,7 @@ gcd_welyam_westmoors_defect_effect = {
         }
         join_all_defensive_wars_of = event_target:gcd_welyam_external_enemy
     }
-    country_event = { id = gcd_welyam.40 }
+    country_event = { id = gcd_welyam.40 days = 1 }
 }
 
 # 待接入（用户已确认）：阿德肖叛乱尚未设计，不误用冰冻喉的克洛维叛乱。

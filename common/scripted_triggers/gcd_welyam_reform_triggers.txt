@@ -25,3 +25,12 @@ gcd_welyam_has_karina_trigger = {
     has_consort = yes
     has_consort_flag = gcd_welyam_karina_deland
 }
+
+# 新增：为空省生成固定规模叛军，避免计数或裁剪波及既有军队。
+gcd_welyam_safe_rebel_province_trigger = {
+    owned_by = A13
+    controlled_by = A13
+    is_city = yes
+    NOT = { units_in_province = 1 }
+    can_spawn_rebels = noble_rebels
+}

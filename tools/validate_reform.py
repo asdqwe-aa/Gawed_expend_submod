@@ -11,6 +11,7 @@ import subprocess
 from check_encoding import errors
 from check_event_structure import errors as event_errors
 from pdx_script import Node, parse
+from validate_welyam_units_and_reforms import validate as validate_units_and_reforms
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -42,7 +43,7 @@ def decode_special(text):
 
 class TimerCheck:
     """只解释计时所用的简单条件/标记，直接运行实际 AST，检查边界与停用行为。"""
-    def __init__(self, effects, disaster=True, loyalty=19):
+    def __init__(self, effects, disaster=True, loyalty=19, free_rebel_province=True):
         self.effects = effects
         self.flags = {}
         self.day = 0
@@ -50,6 +51,9 @@ class TimerCheck:
         self.loyalty = loyalty
         self.events = []
         self.removed = []
+        self.rebel_attempts = 0
+        self.daily_calls = 0
+        self.free_rebel_province = free_rebel_province
 
     def condition(self, node):
         k, v = node.key, node.value
@@ -68,6 +72,11 @@ class TimerCheck:
             return f in self.flags and self.day - self.flags[f] >= int(node.scalar("days"))
         if k == "estate_loyalty":
             return self.loyalty >= float(node.scalar("loyalty"))
+        if k == "tag":
+            return v == "A13"
+        if k == "any_owned_province":
+            # 具体省份资格由单位模型检查，这里只模拟是否存在可用省份。
+            return self.free_rebel_province
         # 战争结果由下方的结构检查覆盖，不模拟引擎的 is_in_war。
         raise AssertionError(f"计时检查遇到未支持条件：{k}")
 
@@ -99,7 +108,12 @@ class TimerCheck:
                 self.events.append(n.scalar("id"))
             elif k == "gcd_welyam_check_civil_war_outcome_effect":
                 continue
+            elif k == "gcd_welyam_try_spawn_fixed_rebels_effect":
+                # 单位处理由独立的团数检查覆盖；此模型没有空省，只记录是否发起尝试。
+                self.rebel_attempts += 1
             elif k in self.effects:
+                if k == "gcd_welyam_daily_reform_effect":
+                    self.daily_calls += 1
                 self.execute(self.effects[k])
             else:
                 raise AssertionError(f"计时检查遇到未支持效果：{k}")
@@ -113,13 +127,15 @@ def validate(anb: Path, game: Path):
             if file.name == "gcd_city_development.txt":
                 continue  # 与本次内容无关的 GUI DSL 不纳入此读取器。
             trees[file.relative_to(ROOT).as_posix()] = parse(file.read_text(encoding="utf-8-sig"))
-    effects = {n.key: n for n in trees["common/scripted_effects/gcd_welyam_reform_effects.txt"].children()}
+    effect_nodes = [n for path, tree in trees.items() if path.startswith("common/scripted_effects/") for n in tree.children()]
+    effect_tree = Node("ROOT", effect_nodes, 0, 0)
+    effects = {n.key: n for n in effect_nodes}
     triggers = {n.key: n for n in trees["common/scripted_triggers/gcd_welyam_reform_triggers.txt"].children()}
     events = {n.scalar("id"): n for n in trees["events/gcd_welyam_reform_events.txt"].children("country_event")}
-    assert len(events) == 11
+    assert len(events) == 12
     # 修正（闪退）：检查隐藏事件的必要选项及 immediate 中经过 scripted effect 的事件调用环。
     assert not event_errors(trees["events/gcd_welyam_reform_events.txt"],
-                            trees["common/scripted_effects/gcd_welyam_reform_effects.txt"])
+                            effect_tree)
     # 回归：确实能拒绝本次发生栈溢出的历史版本，而非仅证明修复版能被括号读取器接受。
     bad_events = parse(subprocess.check_output([
         "git", "show", "3b62e30:events/gcd_welyam_reform_events.txt"], cwd=ROOT).decode("utf-8"))
@@ -129,6 +145,19 @@ def validate(anb: Path, game: Path):
     assert any("gcd_welyam.90 缺少" in p for p in rejected)
     assert any("gcd_welyam.2 缺少" in p for p in rejected)
     assert any("immediate 事件调用环" in p and "gcd_welyam.90" in p for p in rejected)
+    # 回归：上一次把循环移到 option 的版本仍有 .90 -> .90，必须被新检查拒绝。
+    previous_events = parse(subprocess.check_output([
+        "git", "show", "3f3eb13:events/gcd_welyam_reform_events.txt"], cwd=ROOT).decode("utf-8"))
+    previous_effects = parse(subprocess.check_output([
+        "git", "show", "3f3eb13:common/scripted_effects/gcd_welyam_reform_effects.txt"], cwd=ROOT).decode("utf-8"))
+    assert any("含选项和延迟的 事件调用环" in p and "gcd_welyam.90" in p
+               for p in event_errors(previous_events, previous_effects))
+    # .90 只保留旧存档兼容入口，不能再由代码安排下一次。
+    for effect in effects.values():
+        assert not any(n.key == "country_event" and n.scalar("id") == "gcd_welyam.90" for n in effect.walk())
+    for event in events.values():
+        for block in event.children("option") + event.children("immediate") + event.children("after"):
+            assert not any(n.key == "country_event" and n.scalar("id") == "gcd_welyam.90" for n in block.walk())
     mods = {n.key: n for n in trees["common/event_modifiers/gcd_welyam_reform_modifiers.txt"].children()}
     assert len(mods) == 6
 
@@ -230,8 +259,31 @@ def validate(anb: Path, game: Path):
             c.flags["gcd_welyam_rebel_spawn_stopped"] = 0
         c.execute(daily)
         assert ("gcd_welyam_fixed_rebels_due" in c.flags) == (not ended and not stopped)
-    assert not any(n.key == "spawn_rebels" for n in trees["events/gcd_welyam_reform_events.txt"].walk())
-    assert not any(n.key == "spawn_rebels" for e in effects.values() for n in e.walk())
+        assert c.events.count("gcd_welyam.91") == int(not ended and not stopped)
+    # 不重复投递；没有空省先保留到期状态，有空省再投递一次隐藏事件。
+    waiting = TimerCheck(effects, loyalty=50, free_rebel_province=False)
+    waiting.flags["gcd_welyam_rebel_clock"] = 0
+    waiting.day = 730
+    waiting.execute(daily)
+    assert not waiting.events and "gcd_welyam_fixed_rebels_due" in waiting.flags
+    waiting.free_rebel_province, waiting.day = True, 731
+    waiting.execute(daily)
+    waiting.day = 732
+    waiting.execute(daily)
+    assert waiting.events == ["gcd_welyam.91"]
+    # 原生回调与旧存档兼容入口同一天同时运行，也只能执行一次。
+    once = TimerCheck(effects, loyalty=50)
+    once.flags["gcd_welyam_daily_pulse_installed"] = 0
+    once.execute(effects["gcd_welyam_run_daily_once_effect"])
+    once.execute(effects["gcd_welyam_run_daily_once_effect"])
+    assert once.daily_calls == 1
+    once.day = 1
+    once.execute(effects["gcd_welyam_run_daily_once_effect"])
+    assert once.daily_calls == 2
+    once.disaster = False
+    once.day = 2
+    once.execute(effects["gcd_welyam_run_daily_once_effect"])
+    assert once.daily_calls == 2
 
     # 解禁只移除本灾难施加的标记；其他来源的禁令保留。
     for owned in (True, False):
@@ -244,6 +296,7 @@ def validate(anb: Path, game: Path):
     m2 = all_missions["a13_5_2"].children("effect")[0]
     assert any(n.key == "gcd_welyam_unlock_burgher_loans_effect" for n in m2.walk())
     assert "解除威利亚姆改革施加的富商贷款禁令" in source
+    validate_units_and_reforms(effects, triggers, all_missions, events, anb)
 
     # 精确核对两种结局的名单及事件来源；首都控制者必须属于本次战争的攻击方。
     crown = effects["gcd_welyam_crown_victory_effect"]

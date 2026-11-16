@@ -570,14 +570,20 @@ a13_mission_5 = { # 第 5 列
         }
         provinces_to_highlight = { }
         trigger = {
-            government_rank = 2
+            # 修正（用户澄清）：要求君主制已选到二级政改，国家等级“王国”不能代替。
+            government = monarchy
+            reform_level = 2
             adm_power = 100
         }
         effect = {
             add_adm_power = -100
+            # 新增：若选了其他二级政改，先只移除该层选择，再给予“赋予富商议会权力”。
+            hidden_effect = { gcd_welyam_normalize_tier2_effect = yes }
+            custom_tooltip = gcd_welyam_tier2_reform_tt
             # 新增：停止灾难每两年的贵族叛乱接口；已有叛军不自动消失。
             set_country_flag = gcd_welyam_rebel_spawn_stopped
             clr_country_flag = gcd_welyam_fixed_rebels_due
+            clr_country_flag = gcd_welyam_rebel_event_queued
             # 修正（用户补充）：在完成此任务时立即解除借款禁令，且在任务提示里说明。
             hidden_effect = { gcd_welyam_unlock_burgher_loans_effect = yes }
             add_country_modifier = { name = gcd_welyam_royal_right_hand duration = -1 }

@@ -1,4 +1,15 @@
 # 新增：独立追加 on_action，不覆盖 Anbennar 的 00_on_actions.txt。
+on_startup = {
+    # 修正：旧存档已有灾难/内战时接入原生每日检查，不再依赖保存中的循环事件。
+    if = {
+        limit = {
+            tag = A13
+            OR = { has_disaster = gcd_welyam_reform has_country_flag = gcd_welyam_civil_war_active }
+        }
+        gcd_welyam_install_daily_pulse_effect = yes
+    }
+}
+
 # 加韦顿陷落时立即检查；每日循环也检查战分和非围城方式的控制权变化。
 on_siege_won_province = {
     if = {

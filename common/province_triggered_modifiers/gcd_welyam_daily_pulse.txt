@@ -1,0 +1,14 @@
+# 修正：沿用 Anbennar feiten_daily_pulse 的每日翻转结构；不包含循环 country_event。
+gcd_welyam_daily_pulse = {
+    potential = { always = yes }
+    hidden = yes
+    trigger = { NOT = { has_province_flag = gcd_welyam_daily_flip } }
+    on_activation = {
+        set_province_flag = gcd_welyam_daily_flip
+        A13 = { gcd_welyam_run_daily_once_effect = yes }
+    }
+    on_deactivation = {
+        clr_province_flag = gcd_welyam_daily_flip
+        A13 = { gcd_welyam_run_daily_once_effect = yes }
+    }
+}
