@@ -19,9 +19,17 @@ country_event = {
 
 country_event = {
     id = gcd_welyam.2
+    title = gcd_welyam.2.t
+    desc = gcd_welyam_placeholder_desc
+    picture = NOBLE_ESTATE_eventPicture
     hidden = yes
     is_triggered_only = yes
-    immediate = { gcd_welyam_cleanup_reform_effect = yes }
+    # 修正（闪退）：隐藏事件也保留必需的自动选项，与 Anbennar 隐藏事件结构一致。
+    option = {
+        name = gcd_welyam.2.a
+        ai_chance = { factor = 1 }
+        gcd_welyam_cleanup_reform_effect = yes
+    }
 }
 
 country_event = {
@@ -95,6 +103,9 @@ country_event = {
 
 country_event = {
     id = gcd_welyam.90
+    title = gcd_welyam.90.t
+    desc = gcd_welyam_placeholder_desc
+    picture = NOBLE_ESTATE_eventPicture
     hidden = yes
     is_triggered_only = yes
     trigger = {
@@ -104,7 +115,11 @@ country_event = {
             has_country_flag = gcd_welyam_civil_war_active
         }
     }
-    immediate = {
+    # 修正（12月12日栈溢出）：不能在 immediate 中安排自身。
+    # 按 Anbennar diggy_dungeons.2000 的结构，在隐藏自动选项中执行并延迟下一轮。
+    option = {
+        name = gcd_welyam.90.a
+        ai_chance = { factor = 1 }
         gcd_welyam_daily_reform_effect = yes
         # 新增：灾难/内战均结束后不再排队下一天，避免永久空转。
         if = {

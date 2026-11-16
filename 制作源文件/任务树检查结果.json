@@ -60,6 +60,15 @@
     "new_modifiers": 6,
     "loan_unlock": "a13_5_2 immediately, disaster end fallback",
     "compatibility_files_preserve_upstream": true,
-    "note": "本轮新增内容未在游戏中测试；不沿用先前任务编码修复的加载验证结论。"
+    "note": "本轮新增内容未在游戏中测试；不沿用先前任务编码修复的加载验证结论。",
+    "crash_fix": {
+      "exception": "C00000FD / EXCEPTION_STACK_OVERFLOW",
+      "reported_ingame_date": "12-12",
+      "suspect_event": "gcd_welyam.90",
+      "bad_commit": "3b62e30",
+      "fix": "move hidden daily loop from immediate to automatic option; add missing options to .2 and .90",
+      "historical_bug_rejected_by_validator": true,
+      "runtime_retest_pending": true
+    }
   }
 }

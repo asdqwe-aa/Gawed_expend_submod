@@ -9,6 +9,7 @@ import re
 import subprocess
 
 from check_encoding import errors
+from check_event_structure import errors as event_errors
 from pdx_script import Node, parse
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -116,6 +117,18 @@ def validate(anb: Path, game: Path):
     triggers = {n.key: n for n in trees["common/scripted_triggers/gcd_welyam_reform_triggers.txt"].children()}
     events = {n.scalar("id"): n for n in trees["events/gcd_welyam_reform_events.txt"].children("country_event")}
     assert len(events) == 11
+    # 修正（闪退）：检查隐藏事件的必要选项及 immediate 中经过 scripted effect 的事件调用环。
+    assert not event_errors(trees["events/gcd_welyam_reform_events.txt"],
+                            trees["common/scripted_effects/gcd_welyam_reform_effects.txt"])
+    # 回归：确实能拒绝本次发生栈溢出的历史版本，而非仅证明修复版能被括号读取器接受。
+    bad_events = parse(subprocess.check_output([
+        "git", "show", "3b62e30:events/gcd_welyam_reform_events.txt"], cwd=ROOT).decode("utf-8"))
+    bad_effects = parse(subprocess.check_output([
+        "git", "show", "3b62e30:common/scripted_effects/gcd_welyam_reform_effects.txt"], cwd=ROOT).decode("utf-8"))
+    rejected = event_errors(bad_events, bad_effects)
+    assert any("gcd_welyam.90 缺少" in p for p in rejected)
+    assert any("gcd_welyam.2 缺少" in p for p in rejected)
+    assert any("immediate 事件调用环" in p and "gcd_welyam.90" in p for p in rejected)
     mods = {n.key: n for n in trees["common/event_modifiers/gcd_welyam_reform_modifiers.txt"].children()}
     assert len(mods) == 6
 
