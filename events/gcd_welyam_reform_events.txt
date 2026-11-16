@@ -58,7 +58,8 @@ country_event = {
         name = gcd_welyam.20.a
         # 新增：只有原稿第一路线可用此选项，不可在完成任务后临时换路线领另一奖励。
         trigger = { has_country_flag = gcd_welyam_task3_settlement_route }
-        add_country_modifier = { name = gcd_welyam_noble_settlement duration = -1 }
+        # 修正（图三）：第一路线持续到君主死亡。
+        add_ruler_modifier = { name = gcd_welyam_noble_settlement duration = -1 }
         hidden_effect = {
             set_country_flag = gcd_welyam_civil_war_blocked
             clr_country_flag = gcd_welyam_low_nobles_since
@@ -70,7 +71,22 @@ country_event = {
     option = {
         name = gcd_welyam.20.b
         trigger = { has_country_flag = gcd_welyam_task3_consolidation_route }
-        # 新增：第二路线持续十年，不设置内战豁免标记。
+        # 兼容：仅处理旧存档已经排队的共享事件，转入真正的第二路线事件。
+        country_event = { id = gcd_welyam.21 days = 1 }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.21
+    title = gcd_welyam.21.t
+    desc = gcd_welyam_placeholder_desc
+    picture = NOBLE_ESTATE_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = gcd_welyam.21.a
+        # 新增（用户图三）：立即没收贵族土地并降低忠诚；十年修正单独计时。
+        change_estate_land_share = { estate = estate_nobles share = -20 }
+        add_estate_loyalty = { estate = estate_nobles loyalty = -20 }
         add_country_modifier = { name = gcd_welyam_crown_consolidation duration = 3650 }
     }
 }
@@ -185,7 +201,23 @@ country_event = {
     title = gcd_welyam.101.t
     desc = gcd_welyam_placeholder_desc
     picture = CIVIL_WAR_eventPicture
-    is_triggered_only = yes
+    # 修正：保留脚本即时投递，同时允许国家事件系统独立补触发，不再完全依赖 queued。
+    fire_only_once = yes
+    trigger = {
+        tag = A13
+        gcd_welyam_civil_war_active_trigger = yes
+        NOT = { has_country_flag = gcd_welyam_civil_war_result_delivered }
+        NOT = { has_country_flag = gcd_welyam_civil_war_crown_selected }
+        OR = {
+            has_country_flag = gcd_welyam_civil_war_lords_selected
+            gcd_welyam_capital_lost_trigger = yes
+        }
+    }
+    mean_time_to_happen = { days = 1 }
+    immediate = {
+        set_country_flag = gcd_welyam_civil_war_lords_selected
+        set_country_flag = gcd_welyam_civil_war_result_delivered
+    }
     option = {
         name = gcd_welyam.101.a
         custom_tooltip = gcd_welyam_lords_victory_tt
@@ -198,7 +230,25 @@ country_event = {
     title = gcd_welyam.102.t
     desc = gcd_welyam_placeholder_desc
     picture = CIVIL_WAR_eventPicture
-    is_triggered_only = yes
+    fire_only_once = yes
+    trigger = {
+        tag = A13
+        gcd_welyam_civil_war_active_trigger = yes
+        NOT = { has_country_flag = gcd_welyam_civil_war_result_delivered }
+        NOT = { has_country_flag = gcd_welyam_civil_war_lords_selected }
+        OR = {
+            has_country_flag = gcd_welyam_civil_war_crown_selected
+            AND = {
+                NOT = { gcd_welyam_capital_lost_trigger = yes }
+                war_score_against = { who = A50 value = 99 }
+            }
+        }
+    }
+    mean_time_to_happen = { days = 1 }
+    immediate = {
+        set_country_flag = gcd_welyam_civil_war_crown_selected
+        set_country_flag = gcd_welyam_civil_war_result_delivered
+    }
     option = {
         name = gcd_welyam.102.a
         custom_tooltip = gcd_welyam_crown_victory_tt

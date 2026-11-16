@@ -608,17 +608,22 @@ a13_mission_5 = { # 第 5 列
             # 提醒：200 金币只作检查；原稿没有扣款奖励，故此处不增加扣款。
         }
         effect = {
-            # 新增：锁定任务完成时的路线，防止事件等待期间改变影响力来换奖励。
-            if = {
-                limit = { gcd_welyam_settlement_route_trigger = yes }
-                hidden_effect = { set_country_flag = gcd_welyam_task3_settlement_route }
-                custom_tooltip = gcd_welyam_settlement_preview_tt
+            # 修正：始终展示两种完成方式及各自事件，不能只显示当前符合的一种。
+            custom_tooltip = gcd_welyam_task3_routes_preview_tt
+            hidden_effect = {
+                # 锁定完成当刻的路线，事件等待期间改变影响力不能换奖励。
+                if = {
+                    limit = { gcd_welyam_settlement_route_trigger = yes }
+                    set_country_flag = gcd_welyam_task3_settlement_route
+                    clr_country_flag = gcd_welyam_task3_consolidation_route
+                    country_event = { id = gcd_welyam.20 }
+                }
+                else = {
+                    set_country_flag = gcd_welyam_task3_consolidation_route
+                    clr_country_flag = gcd_welyam_task3_settlement_route
+                    country_event = { id = gcd_welyam.21 }
+                }
             }
-            else = {
-                hidden_effect = { set_country_flag = gcd_welyam_task3_consolidation_route }
-                custom_tooltip = gcd_welyam_consolidation_preview_tt
-            }
-            country_event = { id = gcd_welyam.20 }
         }
     }
 

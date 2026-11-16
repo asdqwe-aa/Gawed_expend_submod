@@ -1,5 +1,11 @@
 # 新增：独立追加 on_action，不覆盖 Anbennar 的 00_on_actions.txt。
 on_startup = {
+    if = {
+        limit = { tag = A13 }
+        gcd_welyam_migrate_lifetime_settlement_effect = yes
+        # 修正：以国家 ROOT 修复旧存档卡住的结局投递。
+        gcd_welyam_check_civil_war_outcome_effect = yes
+    }
     # 修正：旧存档已有灾难/内战时接入原生每日检查，不再依赖保存中的循环事件。
     if = {
         limit = {
@@ -7,6 +13,14 @@ on_startup = {
             OR = { has_disaster = gcd_welyam_reform has_country_flag = gcd_welyam_civil_war_active }
         }
         gcd_welyam_install_daily_pulse_effect = yes
+    }
+}
+
+# 修正：增加国家作用域的月度补查，作为省份日检/围城回调以外的投递通道。
+on_monthly_pulse = {
+    if = {
+        limit = { tag = A13 has_country_flag = gcd_welyam_civil_war_active }
+        gcd_welyam_check_civil_war_outcome_effect = yes
     }
 }
 

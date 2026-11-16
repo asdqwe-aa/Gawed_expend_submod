@@ -12,6 +12,7 @@ from check_encoding import errors
 from check_event_structure import errors as event_errors
 from pdx_script import Node, parse
 from validate_welyam_units_and_reforms import validate as validate_units_and_reforms
+from validate_welyam_routes_and_outcomes import validate as validate_routes_and_outcomes
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -132,7 +133,7 @@ def validate(anb: Path, game: Path):
     effects = {n.key: n for n in effect_nodes}
     triggers = {n.key: n for n in trees["common/scripted_triggers/gcd_welyam_reform_triggers.txt"].children()}
     events = {n.scalar("id"): n for n in trees["events/gcd_welyam_reform_events.txt"].children("country_event")}
-    assert len(events) == 12
+    assert len(events) == 13
     # 修正（闪退）：检查隐藏事件的必要选项及 immediate 中经过 scripted effect 的事件调用环。
     assert not event_errors(trees["events/gcd_welyam_reform_events.txt"],
                             effect_tree)
@@ -297,6 +298,8 @@ def validate(anb: Path, game: Path):
     assert any(n.key == "gcd_welyam_unlock_burgher_loans_effect" for n in m2.walk())
     assert "解除威利亚姆改革施加的富商贷款禁令" in source
     validate_units_and_reforms(effects, triggers, all_missions, events, anb)
+    validate_routes_and_outcomes(effects, triggers, all_missions, events,
+        trees["common/province_triggered_modifiers/gcd_welyam_daily_pulse.txt"].children("gcd_welyam_daily_pulse")[0])
 
     # 精确核对两种结局的名单及事件来源；首都控制者必须属于本次战争的攻击方。
     crown = effects["gcd_welyam_crown_victory_effect"]
@@ -305,7 +308,7 @@ def validate(anb: Path, game: Path):
     assert {n.value for n in lords.walk() if n.key == "vassalize"} == {"B83", "B84", "A52", "A51"}
     assert {n.value for n in lords.walk() if n.key == "inherit"} == {"A13"}
     outcome = effects["gcd_welyam_check_civil_war_outcome_effect"]
-    assert any(n.key == "attackers" and n.value == "THIS" for n in outcome.walk())
+    assert any(n.key == "gcd_welyam_capital_lost_trigger" for n in outcome.walk())
     assert any(n.key == "war_score_against" and n.scalar("value") == "99" for n in outcome.walk())
     assert {n.scalar("id") for n in outcome.walk() if n.key == "country_event"} == {"gcd_welyam.101", "gcd_welyam.102"}
     active = triggers["gcd_welyam_civil_war_active_trigger"]
@@ -316,13 +319,13 @@ def validate(anb: Path, game: Path):
     options = events["gcd_welyam.20"].children("option")
     assert any(n.key == "set_country_flag" and n.value == "gcd_welyam_civil_war_blocked" for n in options[0].walk())
     assert not any(n.key == "set_country_flag" and n.value == "gcd_welyam_civil_war_blocked" for n in options[1].walk())
-    assert options[0].children("add_country_modifier")[0].scalar("duration") == "-1"
-    assert options[1].children("add_country_modifier")[0].scalar("duration") == "3650"
+    assert options[0].children("add_ruler_modifier")[0].scalar("duration") == "-1"
+    assert events["gcd_welyam.21"].children("option")[0].children("add_country_modifier")[0].scalar("duration") == "3650"
     assert events["gcd_welyam.10"].children("option")[0].children("add_ruler_modifier")[0].scalar("duration") == "-1"
     assert {n.scalar("duration") for n in events["gcd_welyam.30"].walk() if n.key == "add_country_modifier"} == {"5475"}
     assert mods["gcd_welyam_great_hunt_karina"].scalar("diplomatic_reputation") == "4"
     cleanup = effects["gcd_welyam_cleanup_reform_effect"]
-    assert {n.value for n in cleanup.walk() if n.key == "remove_country_modifier"} == {"gcd_welyam_royal_right_hand", "gcd_welyam_noble_settlement"}
+    assert {n.value for n in cleanup.walk() if n.key == "remove_country_modifier"} == {"gcd_welyam_royal_right_hand"}
     assert any(n.key == "all_subject_country" for n in all_missions["a13_5_4"].children("trigger")[0].walk())
 
     # 兼容文件剥去插入片段之后与 Anbennar 原文件逐字节一致。

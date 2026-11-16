@@ -2,7 +2,7 @@
 gcd_welyam_royal_right_hand = { nobles_loyalty_modifier = -0.10 }
 # 新增：第一次富商议会，使用 add_ruler_modifier，君主死亡时自动移除。
 gcd_welyam_first_council = { advisor_cost = -0.20 }
-# 新增：任务三第一分支，随灾难结束清除。
+# 修正：任务三第一分支现使用君主修正，持续到当前君主死亡。
 gcd_welyam_noble_settlement = {
     nobles_loyalty_modifier = 0.30
     nobles_influence_modifier = -0.10

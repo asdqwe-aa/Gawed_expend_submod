@@ -29,6 +29,7 @@ gcd_welyam_remove_daily_pulse_effect = {
     # 先关运行标记，防止移除时的 on_deactivation 再次进入检测。
     clr_country_flag = gcd_welyam_daily_pulse_installed
     clr_country_flag = gcd_welyam_last_daily_tick
+    clr_country_flag = gcd_welyam_daily_flip
     221 = {
         remove_province_triggered_modifier = gcd_welyam_daily_pulse
         clr_province_flag = gcd_welyam_daily_flip
@@ -61,7 +62,7 @@ gcd_welyam_run_daily_once_effect = {
 gcd_welyam_cleanup_reform_effect = {
     set_country_flag = gcd_welyam_reform_ended
     remove_country_modifier = gcd_welyam_royal_right_hand
-    remove_country_modifier = gcd_welyam_noble_settlement
+    # 修正（用户图三）：奥尔德沃德会议改为君主修正，不随灾难结束移除。
     gcd_welyam_unlock_burgher_loans_effect = yes
     clr_country_flag = gcd_welyam_low_nobles_since
     clr_country_flag = gcd_welyam_rebel_clock
@@ -267,30 +268,59 @@ gcd_welyam_check_civil_war_outcome_effect = {
         limit = {
             tag = A13
             gcd_welyam_civil_war_active_trigger = yes
-            NOT = { has_country_flag = gcd_welyam_civil_war_result_queued }
+            NOT = { has_country_flag = gcd_welyam_civil_war_result_delivered }
+        }
+        # 修正：旧版曾只设 queued，实际事件却未到达，导致永久禁止再次检查。
+        # 迁移没有胜者标记的旧队列；新队列三天未收到事件时允许重投。
+        if = {
+            limit = {
+                has_country_flag = gcd_welyam_civil_war_result_queued
+                OR = {
+                    AND = {
+                        NOT = { has_country_flag = gcd_welyam_civil_war_lords_selected }
+                        NOT = { has_country_flag = gcd_welyam_civil_war_crown_selected }
+                    }
+                    had_country_flag = { flag = gcd_welyam_civil_war_result_queued days = 3 }
+                }
+            }
+            clr_country_flag = gcd_welyam_civil_war_result_queued
         }
         if = {
             limit = {
-                221 = {
-                    controller = {
-                        is_in_war = {
-                            casus_belli = cb_gcd_gawedi_civil_war
-                            attacker_leader = A50
-                            defender_leader = A13
-                            attackers = THIS
-                        }
-                    }
-                }
+                NOT = { has_country_flag = gcd_welyam_civil_war_lords_selected }
+                NOT = { has_country_flag = gcd_welyam_civil_war_crown_selected }
             }
-            # 新增：叛军或无关第三国占领不能触发“大边区一方攻占加韦顿”。
-            set_country_flag = gcd_welyam_civil_war_result_queued
-            country_event = { id = gcd_welyam.101 days = 1 }
+            if = {
+                limit = { gcd_welyam_capital_lost_trigger = yes }
+                set_country_flag = gcd_welyam_civil_war_lords_selected
+            }
+            else_if = {
+                limit = { war_score_against = { who = A50 value = 99 } }
+                set_country_flag = gcd_welyam_civil_war_crown_selected
+            }
         }
-        else_if = {
-            limit = { war_score_against = { who = A50 value = 99 } }
-            set_country_flag = gcd_welyam_civil_war_result_queued
-            country_event = { id = gcd_welyam.102 days = 1 }
+        if = {
+            limit = { NOT = { has_country_flag = gcd_welyam_civil_war_result_queued } }
+            if = {
+                limit = { has_country_flag = gcd_welyam_civil_war_lords_selected }
+                set_country_flag = gcd_welyam_civil_war_result_queued
+                country_event = { id = gcd_welyam.101 days = 1 }
+            }
+            else_if = {
+                limit = { has_country_flag = gcd_welyam_civil_war_crown_selected }
+                set_country_flag = gcd_welyam_civil_war_result_queued
+                country_event = { id = gcd_welyam.102 days = 1 }
+            }
         }
+    }
+}
+
+# 修正：旧存档已获得的第一路线国家修正，迁移为随当前君主存续的修正。
+gcd_welyam_migrate_lifetime_settlement_effect = {
+    if = {
+        limit = { has_country_modifier = gcd_welyam_noble_settlement }
+        remove_country_modifier = gcd_welyam_noble_settlement
+        add_ruler_modifier = { name = gcd_welyam_noble_settlement duration = -1 }
     }
 }
 

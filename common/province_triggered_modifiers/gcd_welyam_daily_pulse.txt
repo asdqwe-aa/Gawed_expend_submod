@@ -2,13 +2,18 @@
 gcd_welyam_daily_pulse = {
     potential = { always = yes }
     hidden = yes
-    trigger = { NOT = { has_province_flag = gcd_welyam_daily_flip } }
+    # 修正：使用显式 A13 国家作用域，避免隐式省份标记在错误作用域下校验。
+    trigger = { A13 = { NOT = { has_country_flag = gcd_welyam_daily_flip } } }
     on_activation = {
-        set_province_flag = gcd_welyam_daily_flip
-        A13 = { gcd_welyam_run_daily_once_effect = yes }
+        A13 = {
+            set_country_flag = gcd_welyam_daily_flip
+            gcd_welyam_run_daily_once_effect = yes
+        }
     }
     on_deactivation = {
-        clr_province_flag = gcd_welyam_daily_flip
-        A13 = { gcd_welyam_run_daily_once_effect = yes }
+        A13 = {
+            clr_country_flag = gcd_welyam_daily_flip
+            gcd_welyam_run_daily_once_effect = yes
+        }
     }
 }

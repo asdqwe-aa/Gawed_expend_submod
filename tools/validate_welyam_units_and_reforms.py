@@ -17,6 +17,15 @@ class Model:
         self.operations = []
         self.spawn_calls = 0
         self.disaster = True
+        self.day = 730
+        self.events = []
+        self.noble_influence = 20
+        self.noble_privileges = 1
+        self.supremacy = True
+        self.treasury = 200
+        self.noble_land, self.crown_land, self.noble_loyalty = 35, 20, 60
+        self.ruler_modifiers = set()
+        self.country_modifiers = {}
 
     def condition(self, node):
         k, v = node.key, node.value
@@ -57,6 +66,14 @@ class Model:
             return v in self.flags
         if k == "tag":
             return v == "A13"
+        if k == "estate_influence":
+            return self.noble_influence >= float(node.scalar("influence"))
+        if k == "num_of_estate_privileges":
+            return self.noble_privileges >= int(node.scalar("value"))
+        if k == "has_estate_privilege":
+            return self.supremacy
+        if k == "treasury":
+            return self.treasury >= float(v)
         raise AssertionError(f"未支持的校验条件：{k}")
 
     def execute(self, block):
@@ -71,7 +88,11 @@ class Model:
                 if not branch:
                     self.execute(n)
                 branch = None
-            elif k in {"limit", "name", "ai_chance"}:
+            elif k == "else_if":
+                if not branch and self.condition(n.children("limit")[0]):
+                    self.execute(n)
+                    branch = True
+            elif k in {"limit", "name", "ai_chance", "custom_tooltip", "trigger"}:
                 continue
             elif k == "while":
                 loops = 0
@@ -93,10 +114,10 @@ class Model:
             elif k == "random_owned_province":
                 if self.condition(n.children("limit")[0]):
                     self.execute(n)
-            elif k == "owner":
+            elif k in {"owner", "hidden_effect"}:
                 self.execute(n)
             elif k == "set_country_flag":
-                self.flags[v] = 730
+                self.flags[v] = self.day
             elif k == "clr_country_flag":
                 self.flags.pop(v, None)
             elif k == "remove_government_reform":
@@ -105,6 +126,20 @@ class Model:
             elif k == "add_government_reform":
                 self.reforms.add(v)
                 self.operations.append((k, v))
+            elif k == "country_event":
+                self.events.append(n.scalar("id"))
+            elif k == "change_estate_land_share":
+                assert n.scalar("estate") == "estate_nobles"
+                old = self.noble_land
+                self.noble_land = max(0, old + float(n.scalar("share")))
+                self.crown_land += old - self.noble_land
+            elif k == "add_estate_loyalty":
+                assert n.scalar("estate") == "estate_nobles"
+                self.noble_loyalty += float(n.scalar("loyalty"))
+            elif k == "add_ruler_modifier":
+                self.ruler_modifiers.add(n.scalar("name"))
+            elif k == "add_country_modifier":
+                self.country_modifiers[n.scalar("name")] = int(n.scalar("duration"))
             elif k in self.effects:
                 self.execute(self.effects[k])
             else:

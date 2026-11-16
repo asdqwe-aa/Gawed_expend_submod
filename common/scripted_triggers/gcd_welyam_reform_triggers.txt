@@ -15,7 +15,8 @@ gcd_welyam_settlement_route_trigger = {
     treasury = 200
 }
 gcd_welyam_consolidation_route_trigger = {
-    NOT = { estate_influence = { estate = estate_nobles influence = 50 } }
+    # 修正（用户图示）：第二路线必须严格低于 30，30～49 不满足任何路线。
+    NOT = { estate_influence = { estate = estate_nobles influence = 30 } }
     NOT = { num_of_estate_privileges = { estate = estate_nobles value = 2 } }
 }
 
@@ -32,5 +33,20 @@ gcd_welyam_safe_rebel_province_trigger = {
     controlled_by = A13
     is_city = yes
     NOT = { units_in_province = 1 }
-    can_spawn_rebels = noble_rebels
+    # 修正（日志）：can_spawn_rebels=noble_rebels 在当前引擎未通过校验。
+    # 这是脚本强制贵族起义，不再用该条件阻断整个省份筛选。
+}
+
+# 修正：明确识别同一场内战中与 A13 敌对的首都控制者，不依赖 attackers=THIS。
+gcd_welyam_capital_lost_trigger = {
+    221 = {
+        controller = {
+            war_with = A13
+            is_in_war = {
+                casus_belli = cb_gcd_gawedi_civil_war
+                attacker_leader = A50
+                defender_leader = A13
+            }
+        }
+    }
 }

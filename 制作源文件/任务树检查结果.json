@@ -12,7 +12,7 @@
   },
   "remaining_notes": [
     "a13_3_2：frozenmaw_53_happened 没有已知设置来源；保留并加注释，任务需后续事件配套。",
-    "a13_5_3：按影响力至少 50 / 不足 50 两支整理；200 金币仅作条件，不扣款。",
+    "a13_5_3：第一路线影响力>=50、对应特权和200金币；第二路线影响力<30且少于2项贵族特权，触发独立事件并没收20土地、立即降低20忠诚。",
     "阿德肖叛乱：尚未设计，仅预留倒戈接口。",
     "政府改革：用户尚未设计，未加入占位改革。"
   ],
@@ -55,7 +55,7 @@
     "date": "2026-11-16",
     "static_validation": "passed",
     "runtime_tested": false,
-    "events": 12,
+    "events": 13,
     "new_modifiers": 6,
     "loan_unlock": "a13_5_2 immediately, disaster end fallback",
     "compatibility_files_preserve_upstream": true,
@@ -80,6 +80,31 @@
       "fix": "retire looping events; native daily province pulse; defer notifications by 1 day",
       "runtime_retest_pending": true
     },
-    "invalid_effect_fixed": "add_reform_progress -> change_government_reform_progress"
+    "invalid_effect_fixed": "add_reform_progress -> change_government_reform_progress",
+    "task3": {
+      "first_event": "gcd_welyam.20 / 奥尔德沃德会议",
+      "second_event": "gcd_welyam.21 / 大领主之誓",
+      "second_influence": "< 30",
+      "second_land_share": -20,
+      "second_loyalty": -20,
+      "first_modifier_duration": "until current monarch death",
+      "second_modifier_days": 3650,
+      "both_routes_always_previewed": true
+    },
+    "outcome_queue_fix": {
+      "observed_save_date": "1451.1.1",
+      "legacy_queued_date": "1450.6.17",
+      "delayed_or_pending_outcome_event_in_observed_save": false,
+      "legacy_queue_recovered": true,
+      "retry_after_days": 3,
+      "country_scope_fallbacks": [
+        "on_startup",
+        "on_monthly_pulse",
+        "autonomous MTTH events 101/102"
+      ],
+      "runtime_retest_pending": true
+    },
+    "pulse_scope": "explicit A13 country flag flip inside province callback",
+    "rebel_filter_fix": "removed engine-rejected can_spawn_rebels=noble_rebels; owner/controller/empty province checks preserved"
   }
 }
