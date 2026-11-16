@@ -1,0 +1,24 @@
+# 新增：任务二，随改革灾难结束而清除。
+gcd_welyam_royal_right_hand = { nobles_loyalty_modifier = -0.10 }
+# 新增：第一次富商议会，使用 add_ruler_modifier，君主死亡时自动移除。
+gcd_welyam_first_council = { advisor_cost = -0.20 }
+# 新增：任务三第一分支，随灾难结束清除。
+gcd_welyam_noble_settlement = {
+    nobles_loyalty_modifier = 0.30
+    nobles_influence_modifier = -0.10
+}
+# 新增：任务三第二分支，持续十年。
+gcd_welyam_crown_consolidation = {
+    global_unrest = 2
+    global_autonomy = -0.10
+}
+# 新增：大围猎，两种互斥修正均持续十五年；卡丽娜分支包括基础奖励。
+gcd_welyam_great_hunt = {
+    monthly_favor_modifier = 0.20
+    diplomatic_reputation = 2
+}
+gcd_welyam_great_hunt_karina = {
+    monthly_favor_modifier = 0.20
+    diplomatic_reputation = 4
+    ae_impact = -0.15
+}

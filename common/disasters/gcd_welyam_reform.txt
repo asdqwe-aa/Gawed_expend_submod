@@ -1,0 +1,25 @@
+# 新增：开局首个月度灾难检查进入改革；由 on_start 显示用户提供的开局事件。
+gcd_welyam_reform = {
+    ended_by_country_breaking_to_rebels = no
+    potential = {
+        tag = A13
+        # 防护：已经完成末项任务的旧存档不再进入无法重复完成任务的灾难。
+        NOT = { mission_completed = a13_5_5 }
+        NOT = { has_country_flag = gcd_welyam_reform_ended }
+    }
+    can_start = {
+        has_any_disaster = no
+        NOT = { has_country_flag = gcd_welyam_opening_seen }
+    }
+    can_stop = { has_any_disaster = yes }
+    progress = { modifier = { factor = 100 always = yes } }
+    can_end = { has_country_flag = gcd_welyam_reform_completed }
+    modifier = {
+        global_unrest = 2
+        nobles_loyalty_modifier = -0.50
+        reform_progress_growth = 0.20
+    }
+    on_start = gcd_welyam.1
+    on_end = gcd_welyam.2
+    on_monthly = { events = { } }
+}

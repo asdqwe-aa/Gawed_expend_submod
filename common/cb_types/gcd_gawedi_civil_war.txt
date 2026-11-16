@@ -1,0 +1,8 @@
+# 新增：仅由内战事件授予，不能通过外交界面主动使用。
+cb_gcd_gawedi_civil_war = {
+    exclusive = yes
+    valid_for_subject = no
+    is_triggered_only = yes
+    ai_peace_desire = -9999
+    war_goal = gcd_gawedi_civil_war_capital
+}

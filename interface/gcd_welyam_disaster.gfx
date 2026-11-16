@@ -1,0 +1,9 @@
+spriteTypes = {
+    # 新增：复用原版内战图标，不覆盖 Anbennar 灾难图标文件。
+    spriteType = {
+        name = "GFX_disaster_gcd_welyam_reform"
+        texturefile = "gfx//interface//disasters//civil_war.dds"
+        noOfFrames = 3
+        loadType = "INGAME"
+    }
+}

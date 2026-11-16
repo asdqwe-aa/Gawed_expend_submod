@@ -66,11 +66,20 @@ def build_gui(base_path: Path) -> Path:
     return target
 
 
-def build_localisation() -> Path:
+def build_localisation() -> list[Path]:
     convert_file = runpy.run_path(str(SRC / "EU4本地化转码.py"))["convert_file"]
-    target = MOD / "localisation" / "gcd_city_bureau_l_english.yml"
-    convert_file(SRC / "城市发展署_中文原文.yml", target)
-    return target
+    # 新增：统一重建城市、任务与改革本地化，避免修改中文原文后漏更新游戏文件。
+    sources = {
+        "城市发展署_中文原文.yml": "gcd_city_bureau_l_english.yml",
+        "加韦德任务_中文原文.yml": "gawed_stage1_l_english.yml",
+        "威利亚姆改革_中文原文.yml": "gcd_welyam_reform_l_english.yml",
+    }
+    targets = []
+    for source, name in sources.items():
+        target = MOD / "localisation" / name
+        convert_file(SRC / source, target)
+        targets.append(target)
+    return targets
 
 
 def package(destination: Path) -> None:
@@ -100,7 +109,8 @@ def main() -> None:
         if file.exists():
             raise SystemExit(f"请先备份并移除旧经济页迁移前文件：{file}")
     print(build_gui(args.economy_base))
-    print(build_localisation())
+    for target in build_localisation():
+        print(target)
     # 修正（加载）：打包前检查实际文件字节，普通脚本不能混用本地化的 BOM 编码。
     check_path = MOD / "tools" / "check_encoding.py"
     if check_path.exists():

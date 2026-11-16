@@ -1,0 +1,258 @@
+# 新增：只有 A13 的一个每日隐藏事件负责计时，不使用全地图每日国家遍历。
+gcd_welyam_begin_reform_effect = {
+    set_country_flag = gcd_welyam_opening_seen
+    set_country_flag = gcd_welyam_rebel_clock
+    # 提醒：保留其他内容已经设置的借款禁用标记，灾难结束时只撤销本模组的禁令。
+    if = {
+        limit = {
+            NOT = { has_country_flag = estate_burghers_indebted_to_burghers_disabled }
+            # 防护：已经完成任务二的存档进入本灾难时，不重新施加借款禁令。
+            NOT = { has_country_flag = gcd_welyam_rebel_spawn_stopped }
+        }
+        set_country_flag = gcd_welyam_owns_burgher_loan_lock
+        set_country_flag = estate_burghers_indebted_to_burghers_disabled
+    }
+    country_event = { id = gcd_welyam.90 days = 1 }
+}
+
+gcd_welyam_cleanup_reform_effect = {
+    set_country_flag = gcd_welyam_reform_ended
+    remove_country_modifier = gcd_welyam_royal_right_hand
+    remove_country_modifier = gcd_welyam_noble_settlement
+    gcd_welyam_unlock_burgher_loans_effect = yes
+    clr_country_flag = gcd_welyam_low_nobles_since
+    clr_country_flag = gcd_welyam_rebel_clock
+    clr_country_flag = gcd_welyam_fixed_rebels_due
+    # 提醒：十年中央集权、十五年大围猎、随君主存续的顾问修正各自到期，不在此提前删除。
+}
+
+# 修正（用户补充）：任务二即可解除本灾难的借款禁令；灾难结束仍执行相同清理作为兜底。
+gcd_welyam_unlock_burgher_loans_effect = {
+    if = {
+        limit = { has_country_flag = gcd_welyam_owns_burgher_loan_lock }
+        clr_country_flag = estate_burghers_indebted_to_burghers_disabled
+        clr_country_flag = gcd_welyam_owns_burgher_loan_lock
+    }
+}
+
+gcd_welyam_daily_reform_effect = {
+    if = {
+        limit = { has_disaster = gcd_welyam_reform }
+        if = {
+            limit = {
+                NOT = { has_country_flag = gcd_welyam_civil_war_blocked }
+                NOT = { has_country_flag = gcd_welyam_civil_war_happened }
+                NOT = { has_country_flag = gcd_welyam_civil_war_queued }
+                NOT = { estate_loyalty = { estate = estate_nobles loyalty = 20 } }
+            }
+            # 新增：仅首次低于 20 时记日期，持续低忠诚不能每天覆盖起算日期。
+            if = {
+                limit = { NOT = { has_country_flag = gcd_welyam_low_nobles_since } }
+                set_country_flag = gcd_welyam_low_nobles_since
+            }
+            if = {
+                limit = { had_country_flag = { flag = gcd_welyam_low_nobles_since days = 365 } }
+                set_country_flag = gcd_welyam_civil_war_queued
+                country_event = { id = gcd_welyam.100 }
+            }
+        }
+        else = {
+            # 新增：忠诚恢复到 20（包括正好 20），连续一年计时立即作废。
+            clr_country_flag = gcd_welyam_low_nobles_since
+        }
+        if = {
+            limit = {
+                NOT = { has_country_flag = gcd_welyam_rebel_spawn_stopped }
+                had_country_flag = { flag = gcd_welyam_rebel_clock days = 730 }
+            }
+            # 待实现（用户已确认）：必须固定 12k；不使用随科技/发展度缩放的替代叛军。
+            # 目前仅保留两年时钟和接口，不实际生成叛军。任务二仍可关闭该接口。
+            set_country_flag = gcd_welyam_fixed_rebels_due
+            clr_country_flag = gcd_welyam_rebel_clock
+            set_country_flag = gcd_welyam_rebel_clock
+        }
+    }
+    gcd_welyam_check_civil_war_outcome_effect = yes
+}
+
+# 新增：只转让加韦德自己的非首都核心领土，不从第三国夺取土地。
+gcd_welyam_release_revolt_country_effect = {
+    $REBEL_TAG$ = {
+        every_core_province = {
+            limit = { owned_by = A13 is_capital = no }
+            cede_province = $REBEL_TAG$
+        }
+    }
+    $REBEL_TAG$ = {
+        if = { limit = { is_subject = yes } grant_independence = yes }
+        if = { limit = { alliance_with = A13 } break_alliance = A13 }
+        if = { limit = { marriage_with = A13 } break_marriage = A13 }
+    }
+}
+
+gcd_welyam_start_civil_war_effect = {
+    set_country_flag = gcd_welyam_civil_war_happened
+    clr_country_flag = gcd_welyam_civil_war_queued
+    clr_country_flag = gcd_welyam_low_nobles_since
+    # 新增：先保障指定叛乱国取得自己的核心，再释放其余所有可释放国家，避免核心重叠次序问题。
+    gcd_welyam_release_revolt_country_effect = { REBEL_TAG = A50 } # 大边区
+    gcd_welyam_release_revolt_country_effect = { REBEL_TAG = B83 } # 格威克
+    gcd_welyam_release_revolt_country_effect = { REBEL_TAG = B84 } # 西山
+    gcd_welyam_release_revolt_country_effect = { REBEL_TAG = A52 } # 鹰冠
+    gcd_welyam_release_revolt_country_effect = { REBEL_TAG = A51 } # 金菲尔德
+    gcd_welyam_release_revolt_country_effect = { REBEL_TAG = A24 } # 威斯特摩尔，不检查独立倾向
+    release_all_possible_countries = yes
+    # 新增：现有属国一并脱离王室；后续只让点名的五国加入大边区。
+    every_subject_country = { grant_independence = yes }
+    # 防护：核心已被移除的旧存档，用一块本国非首都领土建立领头国；不赠送外国领土。
+    if = {
+        limit = { NOT = { exists = A50 } }
+        random_owned_province = {
+            limit = { is_capital = no }
+            add_core = A50
+            cede_province = A50
+        }
+    }
+    if = {
+        limit = { exists = A50 }
+        set_country_flag = gcd_welyam_civil_war_active
+        # 新增：若之前已因其他 CB 交战，先结束该场战争，再建立专用内战。
+        if = { limit = { war_with = A50 } white_peace = A50 }
+        A50 = {
+            declare_war_with_cb = {
+                who = A13
+                casus_belli = cb_gcd_gawedi_civil_war
+                war_goal_province = 221
+            }
+        }
+        # 提醒：EU4 的原生参战效果会加入领头国的所有进攻战争。
+        # 正常开局流程中 A50 刚被释放，只有这场内战；既存 A50 多战争情况见制作说明。
+        gcd_welyam_join_civil_war_effect = { REBEL_TAG = B83 }
+        gcd_welyam_join_civil_war_effect = { REBEL_TAG = B84 }
+        gcd_welyam_join_civil_war_effect = { REBEL_TAG = A52 }
+        gcd_welyam_join_civil_war_effect = { REBEL_TAG = A51 }
+        gcd_welyam_join_civil_war_effect = { REBEL_TAG = A24 }
+    }
+    else = {
+        # 防护：仅剩首都且无法建立领头国时不制造永远无法结算的假战争。
+        clr_country_flag = gcd_welyam_civil_war_happened
+        country_event = { id = gcd_welyam.103 }
+    }
+}
+
+gcd_welyam_join_civil_war_effect = {
+    if = {
+        limit = { exists = $REBEL_TAG$ }
+        $REBEL_TAG$ = {
+            if = { limit = { is_subject = yes } grant_independence = yes }
+            if = { limit = { war_with = A13 } white_peace = A13 }
+            join_all_offensive_wars_of = A50
+        }
+    }
+}
+
+gcd_welyam_check_civil_war_outcome_effect = {
+    if = {
+        limit = {
+            tag = A13
+            gcd_welyam_civil_war_active_trigger = yes
+            NOT = { has_country_flag = gcd_welyam_civil_war_result_queued }
+        }
+        if = {
+            limit = {
+                221 = {
+                    controller = {
+                        is_in_war = {
+                            casus_belli = cb_gcd_gawedi_civil_war
+                            attacker_leader = A50
+                            defender_leader = A13
+                            attackers = THIS
+                        }
+                    }
+                }
+            }
+            # 新增：叛军或无关第三国占领不能触发“大边区一方攻占加韦顿”。
+            set_country_flag = gcd_welyam_civil_war_result_queued
+            country_event = { id = gcd_welyam.101 }
+        }
+        else_if = {
+            limit = { war_score_against = { who = A50 value = 99 } }
+            set_country_flag = gcd_welyam_civil_war_result_queued
+            country_event = { id = gcd_welyam.102 }
+        }
+    }
+}
+
+gcd_welyam_crown_victory_effect = {
+    # 新增：脚本和平不受外交按钮限制；先结束内战，再一次性执行六国吞并。
+    if = { limit = { war_with = A50 } white_peace = A50 }
+    clr_country_flag = gcd_welyam_civil_war_active
+    clr_country_flag = gcd_welyam_civil_war_result_queued
+    inherit = A50
+    inherit = B83
+    inherit = B84
+    inherit = A52
+    inherit = A51
+    inherit = A24
+    # 提醒：王室胜利本身不结束改革灾难，仍须完成“威利亚姆之治”。
+}
+
+gcd_welyam_lords_victory_effect = {
+    if = { limit = { war_with = A50 } white_peace = A50 }
+    clr_country_flag = gcd_welyam_civil_war_active
+    clr_country_flag = gcd_welyam_civil_war_result_queued
+    set_country_flag = gcd_welyam_reform_completed
+    end_disaster = gcd_welyam_reform
+    gcd_welyam_cleanup_reform_effect = yes
+    # 新增：A13 玩家被吞并是用户指定的失败结局；不能自动改成由玩家接管 A50。
+    A50 = {
+        inherit = A13
+        if = { limit = { exists = B83 } vassalize = B83 }
+        if = { limit = { exists = B84 } vassalize = B84 }
+        if = { limit = { exists = A52 } vassalize = A52 }
+        if = { limit = { exists = A51 } vassalize = A51 }
+        # 提醒：失败结局不附庸威斯特摩尔，严格保留用户只点名的四个附庸国。
+    }
+}
+
+# 新增：外交宣战动作的 ROOT 为加韦德、FROM 为被宣战国；只处理主动对洛伦特/皇帝宣战。
+gcd_welyam_on_declare_war_effect = {
+    if = {
+        limit = {
+            tag = A13
+            has_disaster = gcd_welyam_reform
+            FROM = { OR = { tag = A01 is_emperor = yes } }
+            A24 = { is_subject_of = A13 liberty_desire = 50.001 }
+        }
+        FROM = { save_event_target_as = gcd_welyam_external_enemy }
+        gcd_welyam_westmoors_defect_effect = yes
+    }
+}
+
+gcd_welyam_westmoors_defect_effect = {
+    A24 = {
+        grant_independence = yes
+        if = { limit = { alliance_with = A13 } break_alliance = A13 }
+        # 新增：避免先被作为属国拉入王室一方后无法切换阵营。
+        if = {
+            limit = { war_with = event_target:gcd_welyam_external_enemy }
+            white_peace = event_target:gcd_welyam_external_enemy
+        }
+        join_all_defensive_wars_of = event_target:gcd_welyam_external_enemy
+    }
+    country_event = { id = gcd_welyam.40 }
+}
+
+# 待接入（用户已确认）：阿德肖叛乱尚未设计，不误用冰冻喉的克洛维叛乱。
+# 未来由 A13 事件保存敌方领袖为 gcd_welyam_external_enemy 后调用本效果。
+gcd_welyam_on_adshaw_revolt_effect = {
+    if = {
+        limit = {
+            tag = A13
+            has_disaster = gcd_welyam_reform
+            exists = event_target:gcd_welyam_external_enemy
+            A24 = { is_subject_of = A13 liberty_desire = 50.001 }
+        }
+        gcd_welyam_westmoors_defect_effect = yes
+    }
+}

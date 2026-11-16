@@ -11,7 +11,8 @@ a13_mission_1 = { # 第 1 列
     potential = { tag = A13 }
 
     a13_1_1 = { # 煽动半身人
-        icon = contracts_of_correspondence
+        # 同步：保留本地安装版已有的图标调整。
+        icon = mission_sunyanin
         position = 1
         # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
         provinces_to_highlight = { }
@@ -43,7 +44,8 @@ a13_mission_2 = { # 第 2 列
     potential = { tag = A13 }
 
     a13_2_1 = { # 对帝国让步
-        icon = mission_sunyanin
+        # 同步：保留本地安装版已有的图标调整。
+        icon = contracts_of_correspondence
         position = 1
         # 修正：补齐或移除原稿错位的闭合括号，恢复任务、条件和效果的独立层级。
         provinces_to_highlight = { }
@@ -541,6 +543,8 @@ a13_mission_5 = { # 第 5 列
         position = 1
         provinces_to_highlight = { }
         trigger = {
+            # 新增：改革路线从开局灾难开始，避免在灾难尚未进入时领取期限不明的奖励。
+            has_disaster = gcd_welyam_reform
             has_mil_advisor_2 = yes
             has_adm_advisor_2 = yes
             # 修正：原稿重复检查军事顾问；此处改为外交顾问，三类顾问均须至少二级。
@@ -552,7 +556,9 @@ a13_mission_5 = { # 第 5 列
             has_estate_privilege = estate_burghers_magnate_council
         }
         effect = {
-            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+            # 新增：奖励全部在事件选项里发放，任务提供事件及奖励前瞻。
+            custom_tooltip = gcd_welyam_council_preview_tt
+            country_event = { id = gcd_welyam.10 }
         }
     }
 
@@ -569,6 +575,13 @@ a13_mission_5 = { # 第 5 列
         }
         effect = {
             add_adm_power = -100
+            # 新增：停止灾难每两年的贵族叛乱接口；已有叛军不自动消失。
+            set_country_flag = gcd_welyam_rebel_spawn_stopped
+            clr_country_flag = gcd_welyam_fixed_rebels_due
+            # 修正（用户补充）：在完成此任务时立即解除借款禁令，且在任务提示里说明。
+            hidden_effect = { gcd_welyam_unlock_burgher_loans_effect = yes }
+            add_country_modifier = { name = gcd_welyam_royal_right_hand duration = -1 }
+            custom_tooltip = gcd_welyam_rebels_stopped_tt
         }
     }
 
@@ -581,19 +594,25 @@ a13_mission_5 = { # 第 5 列
         }
         provinces_to_highlight = { }
         trigger = {
-            # 修正：原 if 缺少 limit，else 也未正确闭合；按影响力 50 的原分支意图整理。
-            if = {
-                limit = { estate_influence = { estate = estate_nobles influence = 50 } }
-                has_estate_privilege = estate_nobles_supremacy_over_crown
-                treasury = 200
-            }
-            else = {
-                NOT = { num_of_estate_privileges = { estate = estate_nobles value = 2 } }
+            # 新增：复用同一组路线条件，保证任务前瞻与随后事件选项一致。
+            OR = {
+                gcd_welyam_settlement_route_trigger = yes
+                gcd_welyam_consolidation_route_trigger = yes
             }
             # 提醒：200 金币只作检查；原稿没有扣款奖励，故此处不增加扣款。
         }
         effect = {
-            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+            # 新增：锁定任务完成时的路线，防止事件等待期间改变影响力来换奖励。
+            if = {
+                limit = { gcd_welyam_settlement_route_trigger = yes }
+                hidden_effect = { set_country_flag = gcd_welyam_task3_settlement_route }
+                custom_tooltip = gcd_welyam_settlement_preview_tt
+            }
+            else = {
+                hidden_effect = { set_country_flag = gcd_welyam_task3_consolidation_route }
+                custom_tooltip = gcd_welyam_consolidation_preview_tt
+            }
+            country_event = { id = gcd_welyam.20 }
         }
     }
 
@@ -606,8 +625,8 @@ a13_mission_5 = { # 第 5 列
         provinces_to_highlight = { }
         trigger = {
             diplomatic_reputation = 2
-            # 待确认：按原稿保留本国独立倾向 < 50；未擅自改成检查全部属国。
-            NOT = { liberty_desire = 50 }
+            # 修正（图六）：独立倾向检查全部属国，不检查没有宗主的加韦德自身。
+            all_subject_country = { NOT = { liberty_desire = 50 } }
             # 修正：calc_ture_if 拼错；关系条件须和同盟条件一起放入被计数的国家作用域。
             calc_true_if = {
                 amount = 2
@@ -623,7 +642,9 @@ a13_mission_5 = { # 第 5 列
             }
         }
         effect = {
-            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+            # 新增：任务只触发事件；十五年奖励及配偶判断均在事件选项里执行。
+            custom_tooltip = gcd_welyam_hunt_preview_tt
+            country_event = { id = gcd_welyam.30 }
         }
     }
 
@@ -646,7 +667,11 @@ a13_mission_5 = { # 第 5 列
             stability = 2
         }
         effect = {
-            # 待补：原稿奖励为空；保留空奖励，不添加自拟收益。
+            # 新增：完成最后任务立即结束灾难；尚未设计的政府改革不建立虚假引用。
+            set_country_flag = gcd_welyam_reform_completed
+            end_disaster = gcd_welyam_reform
+            hidden_effect = { gcd_welyam_cleanup_reform_effect = yes }
+            custom_tooltip = gcd_welyam_reform_finished_tt
         }
     }
 

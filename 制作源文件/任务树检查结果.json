@@ -12,9 +12,10 @@
   },
   "remaining_notes": [
     "a13_3_2：frozenmaw_53_happened 没有已知设置来源；保留并加注释，任务需后续事件配套。",
-    "a13_5_4：按原稿保留本国独立倾向检查；若意图检查属国忠诚度，需另行确认。",
     "a13_5_3：按影响力至少 50 / 不足 50 两支整理；200 金币仅作条件，不扣款。",
-    "原稿为空的奖励保持为空，未补写剧情或任意奖励。"
+    "固定12k贵族叛军：按用户要求暂留接口，不使用缩放替代。",
+    "阿德肖叛乱：尚未设计，仅预留倒戈接口。",
+    "政府改革：用户尚未设计，未加入占位改革。"
   ],
   "runtime_tested": false,
   "static_validation": "passed",
@@ -50,5 +51,15 @@
     "error_log_bytes": 1842008,
     "ui_verified": false,
     "note": "用户重启后已进入测试局，本轮任务及奖励文件的解析错误未再出现。游戏随后关闭，未核验修复后的任务页图像。"
+  },
+  "welyam_reform": {
+    "date": "2026-11-16",
+    "static_validation": "passed",
+    "runtime_tested": false,
+    "events": 11,
+    "new_modifiers": 6,
+    "loan_unlock": "a13_5_2 immediately, disaster end fallback",
+    "compatibility_files_preserve_upstream": true,
+    "note": "本轮新增内容未在游戏中测试；不沿用先前任务编码修复的加载验证结论。"
   }
 }

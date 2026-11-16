@@ -5,7 +5,8 @@ import sys
 
 def errors(root: Path) -> list[str]:
     result = []
-    for folder in ["common", "missions", "interface"]:
+    # 新增：事件脚本也遵循无 BOM 规则，防止新增事件被首行编码破坏。
+    for folder in ["common", "missions", "interface", "events"]:
         for file in (root / folder).rglob("*"):
             if file.is_file() and file.suffix in {".txt", ".gui", ".gfx"}:
                 data = file.read_bytes()

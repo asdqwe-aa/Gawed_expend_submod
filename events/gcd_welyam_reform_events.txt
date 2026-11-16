@@ -1,0 +1,184 @@
+# 新增：所有 .txt 使用 UTF-8 无 BOM；剧情占位与用户给出的正式开局文本分开保存。
+namespace = gcd_welyam
+
+country_event = {
+    id = gcd_welyam.1
+    title = gcd_welyam.1.t
+    desc = gcd_welyam.1.d
+    # 提醒：仅使用本机可确认存在的原版事件图，剧情图像之后可以替换。
+    picture = NOBLE_ESTATE_eventPicture
+    is_triggered_only = yes
+    immediate = { gcd_welyam_begin_reform_effect = yes }
+    option = {
+        name = gcd_welyam.1.a
+        # 新增：设为 30 而不是增加 30；作用于事件选项执行时全部本国省份。
+        every_owned_province = { set_local_autonomy = 30 }
+        custom_tooltip = gcd_welyam_reform_rules_tt
+    }
+}
+
+country_event = {
+    id = gcd_welyam.2
+    hidden = yes
+    is_triggered_only = yes
+    immediate = { gcd_welyam_cleanup_reform_effect = yes }
+}
+
+country_event = {
+    id = gcd_welyam.10
+    title = gcd_welyam.10.t
+    desc = gcd_welyam_placeholder_desc
+    picture = MERCHANTS_TALKING_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = gcd_welyam.10.a
+        # 新增：图五奖励放在事件选项中；顾问花费持续到当前君主死亡。
+        add_reform_progress = 25
+        add_treasury = 100
+        add_ruler_modifier = { name = gcd_welyam_first_council duration = -1 }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.20
+    title = gcd_welyam.20.t
+    desc = gcd_welyam_placeholder_desc
+    picture = NOBLE_ESTATE_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = gcd_welyam.20.a
+        # 新增：只有原稿第一路线可用此选项，不可在完成任务后临时换路线领另一奖励。
+        trigger = { has_country_flag = gcd_welyam_task3_settlement_route }
+        add_country_modifier = { name = gcd_welyam_noble_settlement duration = -1 }
+        hidden_effect = {
+            set_country_flag = gcd_welyam_civil_war_blocked
+            clr_country_flag = gcd_welyam_low_nobles_since
+            clr_country_flag = gcd_welyam_civil_war_queued
+        }
+        # 新增：按用户要求把“不再触发内战”写在事件选项提示中；仅选项一生效。
+        custom_tooltip = gcd_welyam_civil_war_prevented_tt
+    }
+    option = {
+        name = gcd_welyam.20.b
+        trigger = { has_country_flag = gcd_welyam_task3_consolidation_route }
+        # 新增：第二路线持续十年，不设置内战豁免标记。
+        add_country_modifier = { name = gcd_welyam_crown_consolidation duration = 3650 }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.30
+    title = gcd_welyam.30.t
+    desc = gcd_welyam_placeholder_desc
+    picture = DIPLOMACY_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = gcd_welyam.30.a
+        # 新增：所有大围猎奖励在事件里发放，任务仅触发事件并给前瞻。
+        add_estate_loyalty = { estate = all loyalty = 10 }
+        if = {
+            limit = { gcd_welyam_has_karina_trigger = yes }
+            add_country_modifier = { name = gcd_welyam_great_hunt_karina duration = 5475 }
+        }
+        else = { add_country_modifier = { name = gcd_welyam_great_hunt duration = 5475 } }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.40
+    title = gcd_welyam.40.t
+    desc = gcd_welyam_placeholder_desc
+    picture = DIPLOMACY_eventPicture
+    is_triggered_only = yes
+    option = { name = gcd_welyam.40.a custom_tooltip = gcd_welyam_westmoors_defected_tt }
+}
+
+country_event = {
+    id = gcd_welyam.90
+    hidden = yes
+    is_triggered_only = yes
+    trigger = {
+        tag = A13
+        OR = {
+            has_disaster = gcd_welyam_reform
+            has_country_flag = gcd_welyam_civil_war_active
+        }
+    }
+    immediate = {
+        gcd_welyam_daily_reform_effect = yes
+        # 新增：灾难/内战均结束后不再排队下一天，避免永久空转。
+        if = {
+            limit = {
+                OR = {
+                    has_disaster = gcd_welyam_reform
+                    has_country_flag = gcd_welyam_civil_war_active
+                }
+            }
+            country_event = { id = gcd_welyam.90 days = 1 }
+        }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.100
+    title = gcd_welyam.100.t
+    desc = gcd_welyam_placeholder_desc
+    picture = CIVIL_WAR_eventPicture
+    is_triggered_only = yes
+    trigger = {
+        tag = A13
+        has_disaster = gcd_welyam_reform
+        NOT = { has_country_flag = gcd_welyam_civil_war_blocked }
+        NOT = { has_country_flag = gcd_welyam_civil_war_happened }
+    }
+    option = {
+        name = gcd_welyam.100.a
+        custom_tooltip = gcd_welyam_civil_war_start_tt
+        hidden_effect = {
+            # 防护：事件已弹出但玩家随后选择了任务三第一路线时，不再启动内战。
+            if = {
+                limit = {
+                    has_disaster = gcd_welyam_reform
+                    NOT = { has_country_flag = gcd_welyam_civil_war_blocked }
+                    NOT = { has_country_flag = gcd_welyam_civil_war_happened }
+                }
+                gcd_welyam_start_civil_war_effect = yes
+            }
+        }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.101
+    title = gcd_welyam.101.t
+    desc = gcd_welyam_placeholder_desc
+    picture = CIVIL_WAR_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = gcd_welyam.101.a
+        custom_tooltip = gcd_welyam_lords_victory_tt
+        hidden_effect = { gcd_welyam_lords_victory_effect = yes }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.102
+    title = gcd_welyam.102.t
+    desc = gcd_welyam_placeholder_desc
+    picture = CIVIL_WAR_eventPicture
+    is_triggered_only = yes
+    option = {
+        name = gcd_welyam.102.a
+        custom_tooltip = gcd_welyam_crown_victory_tt
+        hidden_effect = { gcd_welyam_crown_victory_effect = yes }
+    }
+}
+
+country_event = {
+    id = gcd_welyam.103
+    title = gcd_welyam.103.t
+    desc = gcd_welyam.103.d
+    picture = CIVIL_WAR_eventPicture
+    is_triggered_only = yes
+    option = { name = gcd_welyam.103.a }
+}

@@ -1,0 +1,27 @@
+# 新增：始终核对专用 CB 和两位战争领袖，防止其他战争误触发吞并结算。
+gcd_welyam_civil_war_active_trigger = {
+    has_country_flag = gcd_welyam_civil_war_active
+    is_in_war = {
+        casus_belli = cb_gcd_gawedi_civil_war
+        attacker_leader = A50
+        defender_leader = A13
+    }
+}
+
+# 新增：沿用任务原稿的两条完成路线，事件读取任务完成时保存的路线。
+gcd_welyam_settlement_route_trigger = {
+    estate_influence = { estate = estate_nobles influence = 50 }
+    has_estate_privilege = estate_nobles_supremacy_over_crown
+    treasury = 200
+}
+gcd_welyam_consolidation_route_trigger = {
+    NOT = { estate_influence = { estate = estate_nobles influence = 50 } }
+    NOT = { num_of_estate_privileges = { estate = estate_nobles value = 2 } }
+}
+
+# 新增：consort_name 不是已确认的 EU4 条件；在原版卡丽娜事件定义配偶后设置配偶标记。
+# 配偶标记随配偶消失，不会把曾经娶过卡丽娜误当成当前仍是卡丽娜。
+gcd_welyam_has_karina_trigger = {
+    has_consort = yes
+    has_consort_flag = gcd_welyam_karina_deland
+}

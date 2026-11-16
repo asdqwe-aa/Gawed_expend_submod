@@ -1,0 +1,10 @@
+{
+  "common/diplomatic_actions/00_diplomatic_actions.txt": {
+    "anb_sha256": "e4a859e12af050e8dc5876a24ca9f412f985f63a83c89af2e0e260c393fe172f",
+    "generated_sha256": "7d5e0225e31291a609cc7b3cb7b9c1aaf292a3b20c2df5de0b207c143163487c"
+  },
+  "events/Flavour_Gawed_A13.txt": {
+    "anb_sha256": "d2d7d961ab8cba7e66a27d0208f01c733519601da967d0750a41b0557ca9bccd",
+    "generated_sha256": "a7cfeccde04646b26b8428ef94204b82487922f5346693f68ce965aae8f72250"
+  }
+}

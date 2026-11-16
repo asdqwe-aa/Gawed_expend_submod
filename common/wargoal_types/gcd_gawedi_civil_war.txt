@@ -1,0 +1,18 @@
+# 新增：夺取首都型战争目标；脚本固定以加韦顿（221）作为战事目标。
+# 注意：空 peace_options 不能独自禁止白和平，另在 requestpeace 中禁止本场战争的议和。
+gcd_gawedi_civil_war_capital = {
+    type = take_capital
+    attacker = {
+        badboy_factor = 0
+        prestige_factor = 0
+        peace_cost_factor = 1
+        peace_options = { }
+    }
+    defender = {
+        badboy_factor = 0
+        prestige_factor = 0
+        peace_cost_factor = 1
+        peace_options = { }
+    }
+    war_name = GCD_GAWEDI_CIVIL_WAR_NAME
+}
