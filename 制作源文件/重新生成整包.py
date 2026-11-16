@@ -101,6 +101,12 @@ def main() -> None:
             raise SystemExit(f"请先备份并移除旧经济页迁移前文件：{file}")
     print(build_gui(args.economy_base))
     print(build_localisation())
+    # 修正（加载）：打包前检查实际文件字节，普通脚本不能混用本地化的 BOM 编码。
+    check_path = MOD / "tools" / "check_encoding.py"
+    if check_path.exists():
+        problems = runpy.run_path(str(check_path))["errors"](MOD)
+        if problems:
+            raise SystemExit("\n".join(problems))
     if args.zip:
         package(args.zip)
         print(args.zip.resolve())

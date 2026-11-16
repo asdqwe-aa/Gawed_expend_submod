@@ -1,0 +1,9 @@
+root = true
+
+# 修正：普通脚本用无 BOM 的 UTF-8；本地化单独设置。
+[*]
+charset = utf-8
+
+# EU4 本地化仍必须保留 UTF-8 BOM。
+[localisation/*.yml]
+charset = utf-8-bom

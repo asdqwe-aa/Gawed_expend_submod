@@ -22,6 +22,8 @@ Europa Universalis IV / Anbennar 加韦德城市发展署与任务树模组。
 
 运行 `python "制作源文件/重新生成整包.py"` 可重建经济 GUI 和城市本地化。任务中文原文可通过 `EU4本地化转码.py` 单独转换。
 
+脚本 `.txt/.gui/.gfx` 使用无 BOM 编码，本地化 `.yml` 保留 UTF-8 BOM。可运行 `python tools/check_encoding.py` 检查；打包脚本也会执行同一检查，防止任务列因编码而被误读成单个任务。
+
 `missions/Gawedi_Missions.txt` 保留用户提供的原名和内容，用于禁用 Anbennar 原版加韦德任务。自定义第一阶段任务独立放在 `missions/a13_stage1_missions.txt`。
 
 本模组覆盖 `interface/countryeconomyview.gui` 和 `missions/Gawedi_Missions.txt`，与其他修改这两个文件的模组需要合并；不覆盖决议界面或顶栏。逐处修改及待办见 [任务修正说明](制作源文件/加韦德任务_修正说明.md)。

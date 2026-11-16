@@ -28,5 +28,27 @@
     "无国家作用域宣称或效果内裸NOT",
     "任务与修正本地化键齐全，中文转码可还原",
     "2份用户原稿未改动"
-  ]
+  ],
+  "script_encoding": {
+    "missions/a13_stage1_missions.txt": "UTF-8 without BOM",
+    "common/event_modifiers/a13_mission_modifiers1.txt": "UTF-8 without BOM"
+  },
+  "encoding_regression": {
+    "old_commit_rejected": [
+      "missions/a13_stage1_missions.txt",
+      "common/event_modifiers/a13_mission_modifiers1.txt"
+    ],
+    "fixed_files_passed": [
+      "missions/a13_stage1_missions.txt",
+      "common/event_modifiers/a13_mission_modifiers1.txt"
+    ],
+    "script_semantics_unchanged": true
+  },
+  "runtime_loading_tested": true,
+  "loading_log_verification": {
+    "relevant_errors": 0,
+    "error_log_bytes": 1842008,
+    "ui_verified": false,
+    "note": "用户重启后已进入测试局，本轮任务及奖励文件的解析错误未再出现。游戏随后关闭，未核验修复后的任务页图像。"
+  }
 }
